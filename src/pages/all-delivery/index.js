@@ -1,6 +1,6 @@
 import DeliveryList from '../../components/delivery/delivery-list';
 import { useRouter } from 'next/router';
-import PageWithJSbasedForm from './api/all_delivery_data';
+import PageWithJSbasedForm from '../api/all_delivery_data';
 import { useState, useEffect } from 'react';
 export default function Home() {
     const [Data, setData] = useState();
@@ -19,8 +19,8 @@ export default function Home() {
         temp = Data;
     }
     return ( // ignore error saja
-        <div className='p-5'>
-            <DeliveryList items={temp}></DeliveryList>
+        <div className='px-80 py-5'>
+            <DeliveryList items={temp} stats={temp}></DeliveryList>
         </div>
     )
 }
