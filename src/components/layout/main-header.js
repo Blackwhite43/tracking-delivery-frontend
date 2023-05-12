@@ -5,13 +5,13 @@ let temp_data = [];
 function MainHeader() {
     const router = useRouter();
     const data = router.query;
-    console.log("From header");
     if (router.query.plat_no) {
         temp_data[0] = router.query.plat_no
     }
     if (router.query.id) {
         temp_data[1] = router.query.id
     }
+    // console.log(temp_data);
     return (
         <header className={classes.header}>
             <div className={classes.logo}>
