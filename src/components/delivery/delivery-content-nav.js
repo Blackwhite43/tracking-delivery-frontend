@@ -5,7 +5,7 @@ function DeliveryContent(props) {
     const {del_id, plat_no, driver, kenek, customer, asal, jumlah_surat_jalan, jenis_barang, instruksi, delivery_update, photo, verification} = props;
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.patchForm(`http://127.0.0.1:3000/api/v1/user/update-delivery/${del_id}`, {
+        axios.patchForm(`${process.env.URL}/api/v1/user/update-delivery/${del_id}`, {
             status_delivery: document.getElementById('status').value,
             photo: document.getElementById('myfile').files[0]
         })
@@ -34,7 +34,7 @@ function DeliveryContent(props) {
                 <div>Instruksi: {instruksi}</div>
                 <div>Status Delivery: {delivery_update}</div>
                 <div>Status Verification: {verification}</div>
-                <div>Photo: <a href={`http://localhost:3000/${photo}`}>{photo}</a></div>
+                <div>Photo: <a href={`${process.env.URL}/${photo}`}>{photo}</a></div>
                 <br></br>
                 <form>
                     <input type="file" id="myfile" name="myfile"></input>

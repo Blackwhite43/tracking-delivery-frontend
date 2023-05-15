@@ -9,6 +9,7 @@ export default function Home() {
     const router = useRouter();
     const data = router.query;
     // console.log(data);
+    // console.log(process.env.TEST);
     useEffect(() => {
         const test = async () => {
             const x = await PageWithJSbasedForm(data);
