@@ -24,7 +24,7 @@ function Page() {
     }
     if (temp.length == undefined) {
         return (
-            <div className='px-80 py-5'>
+            <div className='px-20 py-5'>
                 <DeliveryContent
                     plat_no={temp.plat_no}
                     del_id={temp.delivery_update._id}

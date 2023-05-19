@@ -23,7 +23,7 @@ export default function Home() {
     if (Data != undefined && Stats != undefined) { //filter undefined data
         if (Stats.length != 0 && Data.length != 0) {
             return ( // ignore error saja
-                <div className='px-80 py-5'>
+                <div className='px-20 py-5'>
                     <DeliveryList items={Data} stats={Stats}></DeliveryList>
                 </div>
             )

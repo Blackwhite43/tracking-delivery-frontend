@@ -13,10 +13,12 @@ export default function Login() {
         })
     })
     return (
-        <form onSubmit={handleSubmit}>
-           <label htmlFor="plat_no">Plat No:</label>
-           <input type="text" id="plat_no" name="plat_no" required />
-           <button type="submit">Submit</button>
-        </form>
+        <div>
+            <form onSubmit={handleSubmit}>
+               <label htmlFor="plat_no">Plat No:</label>
+               <input type="text" id="plat_no" name="plat_no" required />
+               <button type="submit">Submit</button>
+            </form>
+        </div>
     )
 }

@@ -27,14 +27,14 @@ export default function Home() {
             const total_delivery = Stats[0].delivered + Stats[0].not_delivered + Stats[0].out_for_delivery + Stats[0].ready_for_delivery;
             if (total_delivery == Stats[0].delivered) {
                 return (
-                    <div className='px-80 py-5'>
+                    <div className='px-20 py-5'>
                         <div>Halo {Stats[0]._id.driver} dan {Stats[0]._id.kenek}, delivery anda sudah habis</div>
                     </div>
                 )
             }
             else {
                 return (
-                    <div className='px-80 py-5'>
+                    <div className='px-20 py-5'>
                         <div>Halo {Stats[0]._id.driver} dan {Stats[0]._id.kenek}, berikut ini adalah sisa delivery anda</div>
                         <br></br>
                         <DeliveryList items={Data} stats={Stats}></DeliveryList>
@@ -43,5 +43,4 @@ export default function Home() {
             }
         }
     }
-    
 }
