@@ -1,0 +1,25 @@
+.title {
+  font-size: 6.5em;
+  text-align: center;
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 24px 0 64px;
+}
+
+.title > span {
+  display: block;
+  padding-bottom: 10px;
+  margin-bottom: -20px;
+}
+
+.mongodb {
+  background: linear-gradient(90deg, rgb(110, 96, 245), rgb(131, 219, 167));
+}
+
+.mongodb {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  z-index: 1;
+}

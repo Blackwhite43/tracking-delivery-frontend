@@ -15,9 +15,22 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@/locales/*": ["./locales/*"],
+      "@/services/*": ["./services/*"],
+      "@/assets/*": ["./assets/*"],
+      "@/pages-components/*": ["./pages-components/*"],
+      "@/components/*": ["./components/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/index.js", "components/delivery/delivery-content.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.js",
+    "**/*.jsx",
+    "**/*.ts",
+    "**/*.tsx",
+    "src/pages/index.js",
+    "components/delivery/delivery-content.js"
+  ],
   "exclude": ["node_modules"]
 }

@@ -1,0 +1,122 @@
+@import "node_modules/modern-normalize/modern-normalize.css";
+
+:root {
+  --background: #f4f5f7;
+  --foreground: #000;
+  --accents-1: #fafafa;
+  --accents-2: #eaeaea;
+  --accents-3: #999;
+  --accents-4: #888;
+  --accents-5: #666;
+  --accents-6: #444;
+  --accents-7: #333;
+  --accents-8: #111;
+  --accents-9: #f4f5f7;
+  --success-light: #3291ff;
+  --success: #0070f3;
+  --success-dark: #0761d1;
+  --error-light: #ff1a1a;
+  --error: #e00;
+  --error-dark: #c50000;
+  --secondary: #666;
+  --gaya-1: #01b574;
+  --gaya-2: #ffdf34;
+  --gaya-3: #1d2145;
+  --gaya-4: #9499c3;
+  --gaya-5: #1d2145;
+  --gaya-6: #f4f5f7;
+  --gaya-7: #ea7b15;
+
+  --header-background: hsla(0, 0%, 100%, 0.8);
+  --shadow-smallest: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.12);
+  --shadow-large: 0 30px 60px rgba(0, 0, 0, 0.12);
+
+  --link: var(--success);
+  --nav-height: 48px;
+
+  --warna-1: #083389;
+  --warna-2: #dde0e8;
+  --warna-3: #f0f2f5;
+  --warna-4: gray;
+  --warna-5: #888ea8;
+  --warna-6: #083389;
+  --warna-7: #536994;
+  --warna-8: #536994;
+  --warna-9: #161b25;
+  --warna-10: #2a93d5;
+  --warna-11: #0e1726;
+  --warna-12: #d2d6df;
+  --warna-13: #191e3a;
+  --warna-14: #f4f5f7;
+  --warna-15: #dfe0eb;
+  --warna-16: #191e3a;
+  --warna-17: #545454;
+  --warna-18: #ebedf2;
+  --warna-19: #2a93d5;
+  --warna-20: #2a93d5;
+
+  --warna-logo: #332c2b;
+  --warna-bg: #e6e8ec;
+}
+
+[data-theme="dark"] {
+  --foreground: #fff;
+  --background: #131529;
+  --accents-9: #f4f5f7;
+  --accents-8: #fafafa;
+  --accents-7: #eaeaea;
+  --accents-6: #999;
+  --accents-5: #888;
+  --accents-4: #666;
+  --accents-3: #444;
+  --accents-2: #333;
+  --accents-1: #050712;
+  --gaya-1: #01b574;
+  --gaya-2: #ea7b15;
+  --gaya-3: #242744;
+  --gaya-4: #9499c3;
+  --gaya-5: #485179;
+  --gaya-6: #f4f5f7;
+  --gaya-7: #ea7b15;
+  --secondary: var(--accents-5);
+  --header-background: rgba(0, 0, 0, 0.5);
+  --shadow-smallest: 0 0 0 1px var(--accents-2);
+  --shadow-medium: 0 0 0 1px var(--accents-2);
+  --shadow-large: 0 0 0 1px var(--accents-2);
+
+  --warna-1: rgb(26, 28, 45);
+  --warna-2: #060818;
+  --warna-3: #0e1726;
+  --warna-4: #1b55e2;
+  --warna-5: rgba(96, 125, 139, 0.54);
+  /* --warna-6:#009688; */
+  --warna-6: #2a93d5;
+  --warna-7: #506690;
+  --warna-8: #888ea8;
+  --warna-9: #e0e6ed;
+  /* --warna-10:#009688; */
+  --warna-10: #2a93d5;
+  --warna-11: #ebedf2;
+  --warna-12: #1b2e4b;
+  --warna-13: gray;
+  /* --warna-13:#191e3a; */
+  --warna-14: #191e3a;
+  --warna-15: #e0e6ed;
+  --warna-16: #2a93d5;
+  --warna-17: gray;
+  --warna-18: #ebedf2;
+  --warna-19: #2a93d5;
+  --warna-20: #2a93d5;
+
+  --warna-logo: #e6e8ed;
+  --warna-bg: #060818;
+}
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  color: var(--foreground);
+  background-color: var(--background);
+}
