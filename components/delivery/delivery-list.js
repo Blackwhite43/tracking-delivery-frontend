@@ -99,6 +99,7 @@ function DeliveryList(props) {
             jenis_barang={item.jenis_barang}
             instruksi={item.instruksi}
             delivery_update={item.delivery_update.status_delivery}
+            verification={item.delivery_update.verification}
             key={item._id}
           />
         ))}

@@ -13,12 +13,14 @@ function DeliveryContent(props) {
     jenis_barang,
     instruksi,
     delivery_update,
+    photo,
+    verification,
   } = props;
   // console.log(plat_no);
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .patch(`http://127.0.0.1:3000/api/v1/user/update-delivery/${del_id}`, {
+      .patch(`${process.env.URL}/api/v1/user/update-delivery/${del_id}`, {
         status_delivery: document.getElementById("status").value,
       })
       .then((res) => {
@@ -122,6 +124,40 @@ function DeliveryContent(props) {
                     {delivery_update}
                   </button>
                 </div>
+              </div>
+            </li>
+            <li className="pt-3 pb-0 sm:pt-4">
+              <div className="flex items-center space-x-4">
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+                    Status Verification
+                  </p>
+                </div>
+                <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                  <button class="btn btn-primary btn-rounded mb-2">
+                    {verification}
+                  </button>
+                </div>
+              </div>
+            </li>
+            <li className="pt-3 pb-0 sm:pt-4">
+              <div className="flex items-center space-x-4">
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+                    Photo
+                  </p>
+                </div>
+                <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                  <a
+                    class="btn btn-primary btn-rounded mb-2"
+                    href={`${process.env.URL}/${photo}`}
+                  >
+                    {photo}
+                  </a>
+                </div>
+                <form>
+                  <input type="file" id="myfile" name="myfile"></input>
+                </form>
               </div>
             </li>
             <li className="pt-3 pb-0 sm:pt-4">

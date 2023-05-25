@@ -94,27 +94,27 @@ export default function NavBar() {
                 <a href="#">Contact US</a>
               </li> */}
             </ul>
-            {/* <div className="mt-3 space-y-2 xl:hidden lg:hidden md:hidden">
+            <div className="mt-3 space-y-2 xl:hidden lg:hidden md:hidden">
               <Link
                 href="/login"
                 className="inline-block w-full px-4 py-2 text-center text-white bg-gray-600 rounded-md shadow hover:bg-gray-800"
               >
                 Login
               </Link>
-            </div> */}
+            </div>
           </div>
         </div>
         <div className="flex items-center gap-3">
           {/* <BahasaSwitcher /> */}
           {/* <ThemeSwitcher /> */}
-          {/* <div className="hidden space-x-2 md:inline-block">
+          <div className="hidden space-x-2 md:inline-block">
             <Link
               href="/login"
               className="px-4 py-2 text-white bg-gray-600 rounded-md shadow hover:bg-gray-800"
             >
               Login
             </Link>
-          </div> */}
+          </div>
         </div>
       </div>
     </nav>

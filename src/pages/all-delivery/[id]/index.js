@@ -35,6 +35,12 @@ function Page() {
             jenis_barang={temp.jenis_barang}
             instruksi={temp.instruksi}
             delivery_update={temp.delivery_update.status_delivery}
+            photo={
+              temp.delivery_update.photo != undefined
+                ? temp.delivery_update.photo
+                : ""
+            }
+            verification={temp.delivery_update.verification}
             key={temp._id}
           />
         </div>
