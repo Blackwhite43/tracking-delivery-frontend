@@ -16,12 +16,13 @@ function DeliveryContent(props) {
     photo,
     verification,
   } = props;
-  // console.log(plat_no);
+  // console.log(photo);
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .patch(`${process.env.URL}/api/v1/user/update-delivery/${del_id}`, {
+      .patchForm(`${process.env.URL}/api/v1/user/update-delivery/${del_id}`, {
         status_delivery: document.getElementById("status").value,
+        photo: document.getElementById("myfile").files[0]
       })
       .then((res) => {
         if (res.data.status == "success") {
