@@ -30,13 +30,19 @@ function DeliveryContent(props) {
   });
   return (
     <>
-      <div class="flex flex-wrap justify-center mt-10">
+      <div class="flex justify-center mt-10">
         <div class="p-4 max-w-sm">
-          <div class={`flex rounded-lg h-full ${
-              delivery_update == "Ready for Delivery" ? "bg-teal-400" :
-              delivery_update == "Not Delivered" ? "bg-red-500" :
-              delivery_update == "Out for Delivery" ? "bg-yellow-400" :
-              delivery_update == "Delivered" ? "bg-green-400" : ""
+          <div
+            class={`flex rounded-lg h-full ${
+              delivery_update == "Ready for Delivery"
+                ? "bg-teal-400"
+                : delivery_update == "Not Delivered"
+                ? "bg-red-500"
+                : delivery_update == "Out for Delivery"
+                ? "bg-yellow-400"
+                : delivery_update == "Delivered"
+                ? "bg-green-400"
+                : ""
             } p-8 flex-col`}
           >
             <div class="flex items-center mb-3">

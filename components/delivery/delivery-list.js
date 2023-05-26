@@ -86,7 +86,7 @@ function DeliveryList(props) {
           </ul>
         </div>
       </div>
-      <div>
+      <div className="">
         {items.map((item) => (
           <DeliveryContent
             // plat_no={item.plat_no}

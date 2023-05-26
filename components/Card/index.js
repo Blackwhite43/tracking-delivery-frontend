@@ -3,7 +3,7 @@ import React from "react";
 const index = () => {
   return (
     <>
-      <div className="grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 gap-5 p-5">
+      <div className="grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 grid-cols-2 gap-5 p-5">
         <div className="widget widget-table-one">
           <div className="widget-heading p-5">
             <h5 className="">Details Delivery</h5>
