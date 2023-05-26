@@ -18,7 +18,7 @@ function DeliveryContent(props) {
     instruksi,
     delivery_update,
   } = props;
-  // console.log(del_id);
+  // console.log(delivery_update);
   const router = useRouter();
   const handleSubmit = preventDefault(() => {
     router.push({
@@ -32,7 +32,13 @@ function DeliveryContent(props) {
     <>
       <div class="flex flex-wrap justify-center mt-10">
         <div class="p-4 max-w-sm">
-          <div class="flex rounded-lg h-full bg-teal-400 p-8 flex-col">
+          <div class={`flex rounded-lg h-full ${
+              delivery_update == "Ready for Delivery" ? "bg-teal-400" :
+              delivery_update == "Not Delivered" ? "bg-red-500" :
+              delivery_update == "Out for Delivery" ? "bg-yellow-400" :
+              delivery_update == "Delivered" ? "bg-green-400" : ""
+            } p-8 flex-col`}
+          >
             <div class="flex items-center mb-3">
               <div class="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
                 <svg
