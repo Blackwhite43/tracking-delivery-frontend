@@ -4,11 +4,9 @@ import { useRouter } from "next/router";
 import LogoAris from "@/assets/icons/LogoAris";
 // import BahasaSwitcher from "../BahasaSwitcher/BahasaSwitcher";
 // import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
-
+let temp_data = [];
 export default function NavBar() {
   const [navbar, setNavbar] = useState(false);
-
-  let temp_data = [];
   const router = useRouter();
   if (router.query.plat_no) {
     temp_data[0] = router.query.plat_no;
@@ -16,7 +14,7 @@ export default function NavBar() {
   if (router.query.id) {
     temp_data[1] = router.query.id;
   }
-
+  // console.log(temp_data[0], temp_data[1]);
   const newLocal = "/dashboard";
   return (
     <nav className="w-full bg-[var(--warna-1)] shadow">
