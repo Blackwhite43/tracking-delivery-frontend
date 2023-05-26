@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 
 const preventDefault = (f) => (e) => {
   e.preventDefault();
+  console.log("ini", document.getElementById("plat_no").value);
   f(e);
 };
 export default function Login() {
@@ -11,7 +12,12 @@ export default function Login() {
       pathname: "/",
       query: { plat_no: document.getElementById("plat_no").value },
     });
+
+    localStorage.setItem("no_plat", document.getElementById("plat_no").value); //tambah local storage
+    // localStorage.removeItem("no_plat"); //hapus local storage
+    // localStorage.getItem("no_plat") //get
   });
+
   return (
     <div className="flex justify-center">
       <div className="mt-10 w-full max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import BahasaSwitcher from "../../BahasaSwitcher/BahasaSwitcher";
@@ -12,6 +12,17 @@ const NavbarCustom = () => {
   const toggleDropdown = () => {
     setIsOpenProfile(!isOpenProfile);
   };
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.localStorage) {
+      var x = localStorage.getItem("no_plat");
+      if (!x) {
+        console.log("wkwkwkkwkwkw", x); //isina null kosong
+      } else {
+        console.log("wkwkwkkwkwkx aya", x); //ada isina
+      }
+    }
+  }, []);
 
   return (
     <div>
@@ -53,6 +64,7 @@ const NavbarCustom = () => {
 
             <li className="nav-item dropdown user-profile-dropdown d-flex justify-content-center align-items-center ml-2">
               Ahmad Zaky
+              {/* {x} */}
             </li>
 
             <li className="nav-item dropdown user-profile-dropdown">
