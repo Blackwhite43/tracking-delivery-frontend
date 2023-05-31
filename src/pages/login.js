@@ -5,10 +5,11 @@ const preventDefault = (f) => (e) => {
   console.log("ini", document.getElementById("plat_no").value);
   f(e);
 };
+
 export default function Login() {
   const router = useRouter();
   const handleSubmit = preventDefault(() => {
-    router.push({
+    router.replace({
       pathname: "/",
       query: { plat_no: document.getElementById("plat_no").value },
     });
@@ -20,15 +21,15 @@ export default function Login() {
 
   return (
     <div className="flex justify-center">
-      <div className="mt-10 w-full max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+      <div className="mt-10 w-full bg-[var(--warna-14)] max-w-sm p-6 border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
         <form className="space-y-6" onSubmit={handleSubmit}>
-          <h5 className="text-xl font-medium text-gray-900 dark:text-white">
+          <h5 className="text-xl font-medium text-[var(--warna-9)]">
             Input No. Plat Mobil Anda
           </h5>
           <div>
             <label
-              for="plat_no"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              htmlFor="plat_no"
+              className="block mb-2 text-sm font-medium text-[var(--warna-9)]"
             >
               Plat No.
             </label>

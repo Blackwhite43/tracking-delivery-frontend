@@ -54,7 +54,7 @@ const BahasaSwitcher = () => {
         </a>
         {isOpen && (
           <div
-            className="fixed right-100 mt-2 bg-white shadow-lg rounded"
+            className="right-100 mt-2 bg-white shadow-lg rounded fixed z-10"
             style={{ backgroundColor: "var(--warna-12)" }}
           >
             <ul className="py-2">

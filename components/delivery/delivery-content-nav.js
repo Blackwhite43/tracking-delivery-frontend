@@ -22,7 +22,7 @@ function DeliveryContent(props) {
     axios
       .patchForm(`${process.env.URL}/api/v1/user/update-delivery/${del_id}`, {
         status_delivery: document.getElementById("status").value,
-        photo: document.getElementById("myfile").files[0]
+        photo: document.getElementById("myfile").files[0],
       })
       .then((res) => {
         if (res.data.status == "success") {

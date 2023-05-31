@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import LogoAris from "@/assets/icons/LogoAris";
 // import BahasaSwitcher from "../BahasaSwitcher/BahasaSwitcher";
@@ -16,6 +16,25 @@ export default function NavBar() {
   }
   // console.log(temp_data[0], temp_data[1]);
   const newLocal = "/dashboard";
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [dataLocal, setDataLocal] = useState(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const { localStorage } = window;
+      const storedStatus = localStorage.getItem("no_plat");
+      setDataLocal(storedStatus);
+      console.log("cuiii", storedStatus);
+      if (storedStatus) {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+        router.push("/login");
+      }
+    }
+  }, []);
+
   return (
     <nav className="w-full bg-[var(--warna-1)] shadow">
       <div className="justify-between px-6 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
@@ -79,40 +98,46 @@ export default function NavBar() {
               navbar ? "block" : "hidden"
             }`}
           >
-            <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-              <li className="text-white hover:text-indigo-200">
-                <Link href={`/?plat_no=${temp_data[0]}`}>Home</Link>
-              </li>
-              <li className="text-white hover:text-indigo-200">
-                <Link href={`/all-delivery/?plat_no=${temp_data[0]}`}>
-                  All Delivery
-                </Link>
-              </li>
-              {/* <li className="text-white hover:text-indigo-200">
+            {isLoggedIn === true && (
+              <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
+                <li className="text-white hover:text-indigo-200">
+                  <Link href={`/?plat_no=${dataLocal}`}>Home</Link>
+                </li>
+                <li className="text-white hover:text-indigo-200">
+                  <Link href={`/all-delivery/?plat_no=${dataLocal}`}>
+                    All Delivery
+                  </Link>
+                </li>
+                {/* <li className="text-white hover:text-indigo-200">
                 <a href="#">Contact US</a>
               </li> */}
-            </ul>
+              </ul>
+            )}
             <div className="mt-3 space-y-2 xl:hidden lg:hidden md:hidden">
-              <Link
-                href="/login"
-                className="inline-block w-full px-4 py-2 text-center text-white bg-gray-600 rounded-md shadow hover:bg-gray-800"
-              >
-                Login
-              </Link>
+              {isLoggedIn === false && (
+                <Link
+                  href="/login"
+                  className="inline-block w-full px-4 py-2 text-center text-white bg-gray-600 rounded-md shadow hover:bg-gray-800"
+                >
+                  Login
+                </Link>
+              )}
             </div>
           </div>
         </div>
         <div className="flex items-center gap-3">
           {/* <BahasaSwitcher /> */}
           {/* <ThemeSwitcher /> */}
-          <div className="hidden space-x-2 md:inline-block">
-            <Link
-              href="/login"
-              className="px-4 py-2 text-white bg-gray-600 rounded-md shadow hover:bg-gray-800"
-            >
-              Login
-            </Link>
-          </div>
+          {isLoggedIn === false && (
+            <div className="hidden space-x-2 md:inline-block">
+              <Link
+                href="/login"
+                className="px-4 py-2 text-white bg-gray-600 rounded-md shadow hover:bg-gray-800"
+              >
+                Login
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </nav>

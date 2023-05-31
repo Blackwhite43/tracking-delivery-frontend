@@ -21,7 +21,7 @@ export default function Home() {
   }
   return (
     // ignore error saja
-    <div className="px-10 py-5 items-center">
+    <div className="px-2 py-5 items-center">
       <DeliveryList items={temp} stats={temp}></DeliveryList>
     </div>
   );

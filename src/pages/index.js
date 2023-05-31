@@ -56,7 +56,7 @@ export default function Home() {
   } else {
     return (
       // ignore error saja
-      <div className="px-8 py-5 flex flex-col justify-center items-center">
+      <div className="px-2 py-5 items-center">
         <div>
           Halo {driver} dan {kenek}, berikut ini adalah sisa delivery anda
         </div>

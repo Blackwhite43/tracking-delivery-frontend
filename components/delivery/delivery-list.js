@@ -12,81 +12,75 @@ function DeliveryList(props) {
 
   return (
     <>
-      <div className="w-full max-w-md p-12 bg-white border border-gray-200 rounded-lg shadow sm:p-2 dark:bg-gray-800 dark:border-gray-700">
-        <div className="flex items-center justify-between mb-4">
-          <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">
-            Details Delivery
-          </h5>
-        </div>
-        <div className="flow-root">
-          <ul
-            role="list"
-            className="divide-y divide-gray-200 dark:divide-gray-700"
-          >
-            <li className="py-3 sm:py-4">
-              <div className="flex items-center space-x-4">
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                    Plat No:
-                  </p>
-                  <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                    {plat}
-                  </p>
-                </div>
+      <div class="p-2 bg-[var(--warna-14)] border border-gray-200 rounded-lg shadow sm:p-2 dark:bg-gray-800 dark:border-gray-700">
+        <h2 class="text-2xl font-bold mb-2 text-[var(--warna-9)]">
+          Details Delivery
+        </h2>
+        <div className="grid grid-cols-2 gap-1">
+          <li className="sm:py-4 list-none">
+            <div className="flex items-center space-x-4">
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-[var(--warna-9)] truncate">
+                  Plat No:
+                </p>
+                <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+                  {plat}
+                </p>
               </div>
-            </li>
-            <li className="py-3 sm:py-4">
-              <div className="flex items-center space-x-4">
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                    Driver:
-                  </p>
-                  <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                    {driver}
-                  </p>
-                </div>
+            </div>
+          </li>
+          <li className="sm:py-4  list-none">
+            <div className="flex items-center space-x-4">
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-[var(--warna-9)] truncate">
+                  Driver:
+                </p>
+                <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+                  {driver}
+                </p>
               </div>
-            </li>
-            <li className="py-3 sm:py-4">
-              <div className="flex items-center space-x-4">
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                    Kenek:
-                  </p>
-                  <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                    {kenek}
-                  </p>
-                </div>
+            </div>
+          </li>
+          <li className="sm:py-4 list-none">
+            <div className="flex items-center space-x-4">
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-[var(--warna-9)] truncate">
+                  Kenek:
+                </p>
+                <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+                  {kenek}
+                </p>
               </div>
-            </li>
-            <li className="py-3 sm:py-4">
-              <div className="flex items-center space-x-4">
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                    Delivered:
-                  </p>
-                </div>
-                <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+            </div>
+          </li>
+
+          <li className="sm:py-4 list-none">
+            <div className="flex items-center space-x-4">
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-[var(--warna-9)] truncate ">
+                  Delivered:
+                </p>
+                <p className="text-sm text-gray-500 truncate dark:text-gray-400">
                   {delivered}
-                </div>
+                </p>
               </div>
-            </li>
-            <li className="pt-3 pb-0 sm:pt-4">
-              <div className="flex items-center space-x-4">
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                    Remaining Deliveries:
-                  </p>
-                </div>
-                <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+            </div>
+          </li>
+          <li className="pb-0 sm:pt-4 list-none">
+            <div className="flex items-center space-x-4">
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-[var(--warna-9)] truncate ">
+                  Remaining Deliveries:
+                </p>
+                <p className="text-sm text-gray-500 truncate dark:text-gray-400">
                   {index - delivered}
-                </div>
+                </p>
               </div>
-            </li>
-          </ul>
+            </div>
+          </li>
         </div>
       </div>
-      <div className="">
+      <div className="grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
         {items.map((item) => (
           <DeliveryContent
             // plat_no={item.plat_no}
