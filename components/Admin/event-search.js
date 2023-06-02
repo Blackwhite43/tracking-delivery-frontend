@@ -9,7 +9,7 @@ function EventsSearch(props) {
 
   function submitHandler(event) {
     event.preventDefault();
-    console.log(event);
+    // console.log(event);
 
     const selectedStartDate = startDateInputRef.current.value;
     const selectedEndDate = endDateInputRef.current.value;

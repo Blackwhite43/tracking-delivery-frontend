@@ -20,14 +20,16 @@ const NavbarCustom = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const [thema, setThema] = useState("dark");
-
+  let storedStatus, themaStatus;
+  if (typeof window !== "undefined") {
+    storedStatus = localStorage.getItem("no_plat");
+    themaStatus = localStorage.getItem("theme");
+  }
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const { localStorage } = window;
+    // if (typeof window !== "undefined") {
+    //   const { localStorage } = window;
       // Cek status login saat komponen dimuat
-      const storedStatus = localStorage.getItem("no_plat");
-
-      const themaStatus = localStorage.getItem("theme");
+      
       if (themaStatus === "dark") {
         setThema("dark");
       } else {
@@ -39,8 +41,8 @@ const NavbarCustom = () => {
         setIsLoggedIn(false);
         router.push("/login");
       }
-    }
-  }, []);
+    // }
+  }, [storedStatus]);
 
   const [data, setData] = useState(null);
 
@@ -53,8 +55,7 @@ const NavbarCustom = () => {
       // Menyimpan data ke dalam state
       setData(localStorageData);
     }
-  }, []);
-
+  }, [storedStatus]);
   return (
     <div className="sticky top-0">
       {/*  BEGIN NAVBAR  */}
@@ -63,27 +64,62 @@ const NavbarCustom = () => {
           <header className="header border-b border-dashed border-indigo-800 flex justify-between navbar navbar-expand-sm w-full sticky top-0">
             <ul className="flex flex-row theme-brand text-center items-center ml-1">
               <li className="nav-item theme-logo">
-                <Link href={`/?plat_no=${data}`} locale={router.locale}>
-                  <Image
-                    width={50}
-                    height={50}
-                    src={`/templates/assets/img/${
-                      thema === "dark"
-                        ? "logoariswhite.svg"
-                        : "logoarisWarna.png"
-                    }`}
-                    alt="logo"
-                  />
-                </Link>
+                {data == "bangkit2023" ? (
+                  <>
+                    <Link href={`/dashboard/?plat_no=${data}`} locale={router.locale}>
+                      <Image
+                        width={50}
+                        height={50}
+                        src={`/templates/assets/img/${
+                          thema === "dark"
+                            ? "logoariswhite.svg"
+                            : "logoarisWarna.png"
+                        }`}
+                        alt="logo"
+                      />
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <Link href={`/?plat_no=${data}`} locale={router.locale}>
+                      <Image
+                        width={50}
+                        height={50}
+                        src={`/templates/assets/img/${
+                          thema === "dark"
+                            ? "logoariswhite.svg"
+                            : "logoarisWarna.png"
+                        }`}
+                        alt="logo"
+                      />
+                    </Link>
+                  </>
+                )}
+                
               </li>
               <li className="nav-item theme-text">
-                <Link
-                  href={`/?plat_no=${data}`}
-                  locale={router.locale}
-                  className="nav-link"
-                >
-                  INFINITI GROUP
-                </Link>
+                {data == "bangkit2023" ? (
+                  <>
+                    <Link
+                      href={`/dashboard/?plat_no=${data}`}
+                      locale={router.locale}
+                      className="nav-link"
+                    >
+                      INFINITI GROUP
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <Link
+                      href={`/?plat_no=${data}`}
+                      locale={router.locale}
+                      className="nav-link"
+                    >
+                      INFINITI GROUP
+                    </Link>
+                  </>
+                )}
+                
               </li>
             </ul>
 
@@ -100,7 +136,7 @@ const NavbarCustom = () => {
 
               <li className="nav-item dropdown user-profile-dropdown d-flex justify-content-center align-items-center ml-2">
                 {/* Ahmad Zaky */}
-                {data}
+                {data.toUpperCase()}
               </li>
 
               <li className="nav-item dropdown user-profile-dropdown">

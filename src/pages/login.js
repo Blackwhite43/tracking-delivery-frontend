@@ -2,19 +2,27 @@ import { useRouter } from "next/router";
 
 const preventDefault = (f) => (e) => {
   e.preventDefault();
-  console.log("ini", document.getElementById("plat_no").value);
+  // console.log("ini", document.getElementById("plat_no").value);
   f(e);
 };
 
 export default function Login() {
   const router = useRouter();
   const handleSubmit = preventDefault(() => {
-    router.replace({
-      pathname: "/",
-      query: { plat_no: document.getElementById("plat_no").value },
-    });
-
-    localStorage.setItem("no_plat", document.getElementById("plat_no").value); //tambah local storage
+    const plat_no = document.getElementById("plat_no").value;
+    localStorage.setItem("no_plat", plat_no); //tambah local storage
+    if (plat_no == "bangkit2023") {
+      router.replace({
+        pathname: "/dashboard",
+        query: { plat_no: plat_no },
+      });
+    }
+    else {
+      router.replace({
+        pathname: "/",
+        query: { plat_no: plat_no },
+      });
+    }
     // localStorage.removeItem("no_plat"); //hapus local storage
     // localStorage.getItem("no_plat") //get
   });

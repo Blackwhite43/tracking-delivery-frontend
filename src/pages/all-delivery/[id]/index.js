@@ -8,7 +8,6 @@ function Page() {
   const router = useRouter();
   const data = router.query;
   const [Data, setData] = useState();
-
   if (data.id != 0 && data.id != undefined) {
     temp_data = data.id;
   }
@@ -27,6 +26,8 @@ function Page() {
       <>
         <div className="px-10 py-5 flex flex-col items-center">
           <DeliveryContent
+            driver={temp.driver}
+            kenek={temp.kenek}
             plat_no={temp.plat_no}
             del_id={temp.delivery_update._id}
             customer={temp.customer}
@@ -40,6 +41,7 @@ function Page() {
                 ? temp.delivery_update.photo
                 : ""
             }
+            reason={temp.delivery_update.reason}
             verification={temp.delivery_update.verification}
             key={temp._id}
           />

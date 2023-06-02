@@ -5,74 +5,61 @@ import classes from "./event-search.module.css";
 import { useRouter } from "next/router";
 
 const Dashboard = (props) => {
-  const {
-    del_id,
-    plat_no,
-    driver,
-    kenek,
-    customer,
-    asal,
-    jumlah_surat_jalan,
-    jenis_barang,
-    instruksi,
-    delivery_update,
-  } = props;
+  const {del_id, plat_no, driver, kenek, customer, asal, jumlah_surat_jalan, jenis_barang, instruksi, delivery_update} = props;
 
   const [dataDelivery, setDataDelivery] = useState([]);
   const [dataAvailable, setDataAvailable] = useState(true);
 
   function refreshDataDelivery(startDate, endDate) {
     // console.log("ini", startDate, endDate);
-
     var dataSearch = {
       date_start: startDate,
       date_end: endDate,
     };
-    axios
-      .post(`${process.env.URL}/api/v1/admin/custom-dates`, dataSearch)
-      .then((hsl) => {
-        console.log(hsl.data.data);
+    axios.post(`${process.env.URL}/api/v1/admin/custom-dates`, dataSearch)
+    .then((hsl) => {
         if (hsl.data.data.length < 1) {
           setDataAvailable(false);
         } else {
           setDataDelivery(hsl.data.data);
           setDataAvailable(true);
         }
-      });
+    });
   }
   useEffect(() => {
     var getDate = new Date();
-
     var currentDate = getDate.toISOString().split("T")[0];
     var dataSearch = {
       date_start: currentDate,
       date_end: currentDate,
     };
-    axios
-      .post(`${process.env.URL}/api/v1/admin/custom-dates`, dataSearch)
-      .then((hsl) => {
+    axios.post(`${process.env.URL}/api/v1/admin/custom-dates`, dataSearch)
+    .then((hsl) => {
         if (hsl.data.data.length < 1) {
           setDataAvailable(false);
         } else {
           setDataDelivery(hsl.data.data);
           setDataAvailable(true);
         }
-      });
+    });
   }, []);
-
   return (
     <div>
       <EventsSearch onSearch={refreshDataDelivery} />
-
       <div className="grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
         {dataAvailable ? (
           dataDelivery?.map((dataList, idx) => {
             return (
               <KomponenCard
+                key={idx}
                 id={idx}
                 customer={dataList.customer}
                 asal={dataList.asal}
                 jumlah_surat_jalan={dataList.jumlah_surat_jalan}
+                jenis_barang={dataList.jenis_barang}
+                instruksi={dataList.instruksi}
+                delivery_update={dataList.delivery_update.status_delivery}
+                del_id={dataList.delivery_update._id}
               />
             );
           })
@@ -85,18 +72,7 @@ const Dashboard = (props) => {
 };
 
 export function KomponenCard(props) {
-  const {
-    del_id,
-    plat_no,
-    driver,
-    kenek,
-    customer,
-    asal,
-    jumlah_surat_jalan,
-    jenis_barang,
-    instruksi,
-    delivery_update,
-  } = props;
+  const {del_id, plat_no, driver, kenek, customer, asal, jumlah_surat_jalan, jenis_barang, instruksi, delivery_update} = props;
   const router = useRouter();
   const preventDefault = (f) => (e) => {
     e.preventDefault();
@@ -117,26 +93,24 @@ export function KomponenCard(props) {
   return (
     <>
       <div
-        className="mx-4 mt-3 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+        className="mx-4 mt-3 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 "
         id={props._id}
       >
         <div className="container ml-auto mr-auto flex flex-wrap items-start">
           <div className="w-full">
             <div className="bg-[var(--warna-14)] rounded-lg m-h-64 p-2 transform hover:translate-y-2 hover:shadow-xl transition duration-300">
               <div
-                className={`rounded-lg p-4
-              flex flex-col`}
-                // ${
-                //   props.delivery_update == "Ready for Delivery"
-                //     ? "bg-teal-400"
-                //     : delivery_update == "Not Delivered"
-                //     ? "bg-red-500"
-                //     : delivery_update == "Out for Delivery"
-                //     ? "bg-yellow-400"
-                //     : delivery_update == "Delivered"
-                //     ? "bg-green-400"
-                //     : ""
-                // }
+                className={`rounded-lg p-4 flex flex-col
+                ${
+                  props.delivery_update == "Ready for Delivery"
+                    ? "bg-teal-400"
+                    : delivery_update == "Not Delivered"
+                    ? "bg-red-500"
+                    : delivery_update == "Delivered"
+                    ? "bg-green-400"
+                    : ""
+                }`
+              }
               >
                 <div>
                   <h5 className="text-white text-2xl font-bold leading-none ">

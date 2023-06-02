@@ -5,18 +5,7 @@ const preventDefault = (f) => (e) => {
   f(e);
 };
 function DeliveryContent(props) {
-  const {
-    del_id,
-    plat_no,
-    driver,
-    kenek,
-    customer,
-    asal,
-    jumlah_surat_jalan,
-    jenis_barang,
-    instruksi,
-    delivery_update,
-  } = props;
+  const {del_id, plat_no, driver, kenek, customer, asal, jumlah_surat_jalan, jenis_barang, instruksi, delivery_update} = props;
   // console.log(delivery_update);
   const router = useRouter();
   const handleSubmit = preventDefault(() => {
@@ -43,8 +32,6 @@ function DeliveryContent(props) {
                     ? "bg-teal-400"
                     : delivery_update == "Not Delivered"
                     ? "bg-red-500"
-                    : delivery_update == "Out for Delivery"
-                    ? "bg-yellow-400"
                     : delivery_update == "Delivered"
                     ? "bg-green-400"
                     : ""
@@ -213,8 +200,6 @@ function DeliveryContent(props) {
                 ? "bg-teal-400"
                 : delivery_update == "Not Delivered"
                 ? "bg-red-500"
-                : delivery_update == "Out for Delivery"
-                ? "bg-yellow-400"
                 : delivery_update == "Delivered"
                 ? "bg-green-400"
                 : ""

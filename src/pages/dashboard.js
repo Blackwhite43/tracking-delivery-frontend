@@ -22,10 +22,10 @@ const DashboardPage = () => {
       }
     }
 
-    setTimeout(() => {
-      router.push("/");
-      console.log("dipanggil setelah 2 detik");
-    }, 2000);
+    // setTimeout(() => {
+    //   router.push("/");
+    //   console.log("dipanggil setelah 2 detik");
+    // }, 2000);
   });
 
   return (
