@@ -27,7 +27,11 @@ export default function Home() {
     test();
     test2();
   }, [data]);
-
+  if (typeof window !== "undefined") {
+    if (localStorage.getItem("no_plat") == "bangkit2023") {
+      router.replace("/dashboard")
+    }
+  }
   if (Data != undefined && fullData != undefined) {
     //filter undefined data
     temp = Data;
