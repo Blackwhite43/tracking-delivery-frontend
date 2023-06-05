@@ -5,7 +5,18 @@ import classes from "./event-search.module.css";
 import { useRouter } from "next/router";
 
 const Dashboard = (props) => {
-  const {del_id, plat_no, driver, kenek, customer, asal, jumlah_surat_jalan, jenis_barang, instruksi, delivery_update} = props;
+  const {
+    del_id,
+    plat_no,
+    driver,
+    kenek,
+    customer,
+    asal,
+    jumlah_surat_jalan,
+    jenis_barang,
+    instruksi,
+    delivery_update,
+  } = props;
 
   const [dataDelivery, setDataDelivery] = useState([]);
   const [dataAvailable, setDataAvailable] = useState(true);
@@ -16,15 +27,16 @@ const Dashboard = (props) => {
       date_start: startDate,
       date_end: endDate,
     };
-    axios.post(`${process.env.URL}/api/v1/admin/custom-dates`, dataSearch)
-    .then((hsl) => {
+    axios
+      .post(`${process.env.URL}/api/v1/admin/custom-dates`, dataSearch)
+      .then((hsl) => {
         if (hsl.data.data.length < 1) {
           setDataAvailable(false);
         } else {
           setDataDelivery(hsl.data.data);
           setDataAvailable(true);
         }
-    });
+      });
   }
   useEffect(() => {
     var getDate = new Date();
@@ -33,20 +45,21 @@ const Dashboard = (props) => {
       date_start: currentDate,
       date_end: currentDate,
     };
-    axios.post(`${process.env.URL}/api/v1/admin/custom-dates`, dataSearch)
-    .then((hsl) => {
+    axios
+      .post(`${process.env.URL}/api/v1/admin/custom-dates`, dataSearch)
+      .then((hsl) => {
         if (hsl.data.data.length < 1) {
           setDataAvailable(false);
         } else {
           setDataDelivery(hsl.data.data);
           setDataAvailable(true);
         }
-    });
+      });
   }, []);
   return (
     <div>
       <EventsSearch onSearch={refreshDataDelivery} />
-      <div className="grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+      <div className="absolute grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
         {dataAvailable ? (
           dataDelivery?.map((dataList, idx) => {
             return (
@@ -64,7 +77,9 @@ const Dashboard = (props) => {
             );
           })
         ) : (
-          <>hahaha</>
+          <>
+            <h1>Data tidak tersedia</h1>
+          </>
         )}
       </div>
     </div>
@@ -72,7 +87,18 @@ const Dashboard = (props) => {
 };
 
 export function KomponenCard(props) {
-  const {del_id, plat_no, driver, kenek, customer, asal, jumlah_surat_jalan, jenis_barang, instruksi, delivery_update} = props;
+  const {
+    del_id,
+    plat_no,
+    driver,
+    kenek,
+    customer,
+    asal,
+    jumlah_surat_jalan,
+    jenis_barang,
+    instruksi,
+    delivery_update,
+  } = props;
   const router = useRouter();
   const preventDefault = (f) => (e) => {
     e.preventDefault();
@@ -109,8 +135,7 @@ export function KomponenCard(props) {
                     : delivery_update == "Delivered"
                     ? "bg-green-400"
                     : ""
-                }`
-              }
+                }`}
               >
                 <div>
                   <h5 className="text-white text-2xl font-bold leading-none ">

@@ -46,7 +46,7 @@ function EventsSearch(props) {
           <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"></div>
         </div>
       </div>
-      <button className="w-28 rounded-lg font-bold p-1 bg-[var(--warna-6)] text-[var(--warna-3)] hover:bg-grey-700">
+      <button className="m-1 w-28 rounded-lg font-bold p-1 bg-[var(--warna-6)] text-[var(--warna-3)] hover:bg-grey-700">
         Finds Events
       </button>
     </form>
