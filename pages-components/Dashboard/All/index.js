@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import i18n from "@/services/i18n";
 import DataTable from "@/components/DataTable";
 import axios from "axios";
+import Link from "next/link";
 
 const AllDelivery = () => {
   const [delivery, setDelivery] = useState([]);
@@ -26,13 +27,13 @@ const AllDelivery = () => {
       label: "id",
       options: {
         display: "excluded",
-        filter: true,
+        filter: false,
         setCellHeaderProps: () => ({}),
       },
     },
     {
       name: "plat_no",
-      label: i18n.t("plat_no"),
+      label: i18n.t("Plat No."),
       options: {
         filter: true,
         setCellHeaderProps: () => ({
@@ -47,9 +48,9 @@ const AllDelivery = () => {
     },
     {
       name: "driver",
-      label: i18n.t("driver"),
+      label: i18n.t("Driver"),
       options: {
-        filter: true,
+        filter: false,
         setCellHeaderProps: () => ({
           style: {
             fontSize: "4em",
@@ -62,9 +63,9 @@ const AllDelivery = () => {
     },
     {
       name: "kenek",
-      label: i18n.t("kenek"),
+      label: i18n.t("Kenek"),
       options: {
-        filter: true,
+        filter: false,
         setCellHeaderProps: () => ({
           style: {
             fontSize: "4em",
@@ -77,9 +78,9 @@ const AllDelivery = () => {
     },
     {
       name: "customer",
-      label: i18n.t("customer"),
+      label: i18n.t("Customer"),
       options: {
-        filter: true,
+        filter: false,
         setCellHeaderProps: () => ({
           style: {
             fontSize: "4em",
@@ -92,7 +93,7 @@ const AllDelivery = () => {
     },
     {
       name: "asal",
-      label: i18n.t("asal"),
+      label: i18n.t("Asal"),
       options: {
         filter: true,
         setCellHeaderProps: () => ({
@@ -107,24 +108,24 @@ const AllDelivery = () => {
     },
     {
       name: "jumlah_surat_jalan",
-      label: i18n.t("jumlah_surat_jalan"),
+      label: i18n.t("Jumlah Surat Jalan"),
       options: {
-        filter: true,
+        filter: false,
         setCellHeaderProps: () => ({
           style: {
             fontSize: "4em",
           },
         }),
         setCellProps: () => ({ style: { whiteSpace: "nowrap" } }),
-        width: "5em",
+        width: "1em",
         fontSize: "4em",
       },
     },
     {
       name: "jenis_barang",
-      label: i18n.t("jenis_barang"),
+      label: i18n.t("Jenis Barang"),
       options: {
-        filter: true,
+        filter: false,
         setCellHeaderProps: () => ({
           style: {
             fontSize: "4em",
@@ -137,7 +138,7 @@ const AllDelivery = () => {
     },
     {
       name: "delivery_update",
-      label: i18n.t("delivery_update"),
+      label: i18n.t("Status Delivery"),
       options: {
         filter: true,
         setCellHeaderProps: () => ({
@@ -153,7 +154,7 @@ const AllDelivery = () => {
     },
     {
       name: "createdAt",
-      label: i18n.t("Waktu"),
+      label: i18n.t("Created Date"),
       options: {
         customBodyRender: (value) => {
           return (
@@ -162,18 +163,35 @@ const AllDelivery = () => {
                 " - " +
                 new Date(value).toLocaleDateString("id-ID")}
             </div>
-          );
+          )
         },
-        filter: true,
+        filter: false,
         setCellHeaderProps: () => ({}),
         width: "5em",
       },
     },
+    {
+      name: "delivery_update",
+      label: i18n.t("Detail Delivery"),
+      options: {
+        customBodyRender: (value) => {
+          return (
+            <div>
+              <Link className="text-blue-500" href={`/all-delivery/${value._id}`}>
+                Details
+              </Link>
+            </div>
+          )
+        },
+        filter: false
+      },
+      
+    }
   ];
 
   return (
     <>
-      <div class="m-3 p-3 bg-[var(--warna-14)] border border-gray-200 rounded-lg shadow sm:p-2 dark:bg-gray-800 dark:border-gray-700">
+      <div class="m-3 p-3 bg-[var(--warna-14)] border-gray-200 rounded-lg shadow sm:p-2 dark:bg-gray-800 dark:border-gray-700">
         <h2 class="text-2xl font-bold mb-2 text-[var(--warna-9)]">
           Data All Delivery
         </h2>
