@@ -5,38 +5,32 @@ import classes from "./event-search.module.css";
 import { useRouter } from "next/router";
 
 const Dashboard = (props) => {
-  const {
-    del_id,
-    plat_no,
-    driver,
-    kenek,
-    customer,
-    asal,
-    jumlah_surat_jalan,
-    jenis_barang,
-    instruksi,
-    delivery_update,
-  } = props;
-
+  const {del_id, plat_no, driver, kenek, customer, asal, jumlah_surat_jalan, jenis_barang, instruksi, delivery_update, tanggal} = props;
+  const [Statistics, setStatistics] = useState([]);
   const [dataDelivery, setDataDelivery] = useState([]);
   const [dataAvailable, setDataAvailable] = useState(true);
-
+  
   function refreshDataDelivery(startDate, endDate) {
     // console.log("ini", startDate, endDate);
     var dataSearch = {
       date_start: startDate,
       date_end: endDate,
     };
-    axios
-      .post(`${process.env.URL}/api/v1/admin/custom-dates`, dataSearch)
-      .then((hsl) => {
-        if (hsl.data.data.length < 1) {
-          setDataAvailable(false);
-        } else {
-          setDataDelivery(hsl.data.data);
-          setDataAvailable(true);
-        }
-      });
+    axios.post(`${process.env.URL}/api/v1/admin/custom-dates`, dataSearch)
+    .then((hsl) => {
+      if (hsl.data.data.length < 1) {
+        setDataAvailable(false);
+      } else {
+        setDataDelivery(hsl.data.data);
+        setDataAvailable(true);
+      }
+    });
+    axios.post(`${process.env.URL}/api/v1/admin/stats`, dataSearch)
+    .then((hsl) => {
+      if (hsl.data.data.length >= 1) {
+        setStatistics(hsl.data.data);
+      }
+    });
   }
   useEffect(() => {
     var getDate = new Date();
@@ -45,27 +39,82 @@ const Dashboard = (props) => {
       date_start: currentDate,
       date_end: currentDate,
     };
-    axios
-      .post(`${process.env.URL}/api/v1/admin/custom-dates`, dataSearch)
-      .then((hsl) => {
-        if (hsl.data.data.length < 1) {
-          setDataAvailable(false);
-        } else {
-          setDataDelivery(hsl.data.data);
-          setDataAvailable(true);
-        }
-      });
+    axios.post(`${process.env.URL}/api/v1/admin/custom-dates`, dataSearch)
+    .then((hsl) => {
+      if (hsl.data.data.length < 1) {
+        setDataAvailable(false);
+      } else {
+        setDataDelivery(hsl.data.data);
+        setDataAvailable(true);
+      }
+    });
+    axios.post(`${process.env.URL}/api/v1/admin/stats`, dataSearch)
+    .then((hsl) => {
+      if (hsl.data.data.length >= 1) {
+        setStatistics(hsl.data.data);
+      }
+    });
   }, []);
+  var delivered = 0, ready_for_delivery = 0, not_delivered = 0;
+  Statistics.map(idx => {
+    ready_for_delivery += idx.ready_for_delivery;
+    delivered += idx.delivered;
+    not_delivered += idx.not_delivered;
+  })
   return (
     <div>
+      <div class="p-2 bg-[var(--warna-14)] border border-gray-200 rounded-lg shadow sm:p-2 dark:bg-gray-800 dark:border-gray-700">
+        <h2 class="text-2xl font-bold mb-2 text-[var(--warna-9)]">
+          Statistics
+        </h2>
+        <ul className="grid-cols-2 flex justify-between">
+          <li className="sm:py-4 list-none">
+            <div className="flex items-center space-x-4">
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-[var(--warna-9)] truncate">
+                  Ready for Delivery:
+                </p>
+                <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+                  {ready_for_delivery}
+                </p>
+              </div>
+            </div>
+          </li>
+          <li className="sm:py-4  list-none">
+            <div className="flex items-center space-x-4">
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-[var(--warna-9)] truncate">
+                  Delivered:
+                </p>
+                <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+                  {delivered}
+                </p>
+              </div>
+            </div>
+          </li>
+          <li className="sm:py-4 list-none">
+            <div className="flex items-center space-x-4">
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-[var(--warna-9)] truncate">
+                  Not Delivered
+                </p>
+                <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+                  {not_delivered}
+                </p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
       <EventsSearch onSearch={refreshDataDelivery} />
-      <div className="absolute grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
         {dataAvailable ? (
           dataDelivery?.map((dataList, idx) => {
             return (
               <KomponenCard
                 key={idx}
                 id={idx}
+                plat_no={dataList.plat_no}
                 customer={dataList.customer}
                 asal={dataList.asal}
                 jumlah_surat_jalan={dataList.jumlah_surat_jalan}
@@ -73,6 +122,7 @@ const Dashboard = (props) => {
                 instruksi={dataList.instruksi}
                 delivery_update={dataList.delivery_update.status_delivery}
                 del_id={dataList.delivery_update._id}
+                tanggal={dataList.tanggal}
               />
             );
           })
@@ -87,18 +137,7 @@ const Dashboard = (props) => {
 };
 
 export function KomponenCard(props) {
-  const {
-    del_id,
-    plat_no,
-    driver,
-    kenek,
-    customer,
-    asal,
-    jumlah_surat_jalan,
-    jenis_barang,
-    instruksi,
-    delivery_update,
-  } = props;
+  const {del_id, plat_no, driver, kenek, customer, asal, jumlah_surat_jalan, jenis_barang, instruksi, delivery_update, tanggal} = props;
   const router = useRouter();
   const preventDefault = (f) => (e) => {
     e.preventDefault();
@@ -115,7 +154,6 @@ export function KomponenCard(props) {
   });
 
   const [showModal, setShowModal] = useState(false);
-
   return (
     <>
       <div
@@ -129,7 +167,7 @@ export function KomponenCard(props) {
                 className={`rounded-lg p-4 flex flex-col
                 ${
                   props.delivery_update == "Ready for Delivery"
-                    ? "bg-teal-400"
+                    ? "bg-yellow-400"
                     : delivery_update == "Not Delivered"
                     ? "bg-red-500"
                     : delivery_update == "Delivered"
@@ -137,6 +175,16 @@ export function KomponenCard(props) {
                     : ""
                 }`}
               >
+                <div className="grid-cols-2 flex justify-end">
+                  <h5 className="text-white text-1xl font-bold leading-none">
+                      {props.tanggal.split('T')[0]}
+                  </h5>
+                </div>
+                <div className="grid-cols-2 flex justify-start">
+                  <h5 className="text-white text-2xl font-bold leading-none">
+                      {props.plat_no}
+                  </h5>
+                </div>
                 <div>
                   <h5 className="text-white text-2xl font-bold leading-none ">
                     {props.customer}
@@ -149,8 +197,7 @@ export function KomponenCard(props) {
                   <div className="text-lg text-white font-light">
                     <div class="flex-1 min-w-0">
                       <p class="text-sm font-medium hover:text-gray-900 truncate dark:text-white text-white">
-                        Surat Jalan:
-                        {props.jumlah_surat_jalan}
+                        Surat Jalan: {props.jumlah_surat_jalan}
                       </p>
                     </div>
                   </div>

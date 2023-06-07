@@ -34,8 +34,8 @@ function DeliveryContent(props) {
     .then((res) => {
       if (res.data.status == "success") {
         alert(res.data.status);
-        router.push({
-          pathname: "/",
+        router.reload({
+          pathname: `/${del_id}`,
           query: {
             plat_no: plat_no,
           },
@@ -207,9 +207,16 @@ function DeliveryContent(props) {
                   </p>
                 </div>
                 <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                  <button class="btn btn-primary btn-rounded mb-2">
-                    {reason}
-                  </button>
+                  {reason == undefined ? (
+                    <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                      Belum diisi
+                    </div>
+                  ) : (
+                    <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                      {reason}
+                    </div>
+                    )
+                  }
                 </div>
               </div>
             </li>
@@ -235,21 +242,30 @@ function DeliveryContent(props) {
                   </p>
                 </div>
                 <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                  <a
-                    class="btn btn-primary btn-rounded mb-2"
-                    href={`${process.env.URL}/${photo}`}
-                  >
-                    {photo}
-                  </a>
+                  {photo != "" ?
+                    <a
+                      class="btn btn-primary btn-rounded mb-2"
+                      href={`${process.env.URL}/${photo}`}
+                    >
+                      Foto
+                    </a>
+                    : 
+                    <p
+                      class="btn btn-primary btn-rounded mb-2"
+                    >
+                    Tidak ada Foto
+                    </p>
+                  }
                 </div>
-                {storedStatus == "bangkit2023" ? (
+                
+              </div>
+              {storedStatus == "bangkit2023" ? (
                   <></>
                 ) : (
                   <form>
                     <input type="file" id="myfile" name="myfile"></input>
                   </form>
                 )}
-              </div>
             </li>
             {storedStatus == "bangkit2023" ? (
               <li className="pt-3 pb-0 sm:pt-4">
@@ -267,7 +283,7 @@ function DeliveryContent(props) {
                   </div>
                 </div>
               </li>
-            ) : (
+            ) : verification != "Verified by Delivery Team" ? (
               <li className="pt-3 pb-0 sm:pt-4">
                 <div className="flex items-center space-x-4">
                   <div className="flex-1 min-w-0">
@@ -284,6 +300,8 @@ function DeliveryContent(props) {
                   </div>
                 </div>
               </li>
+            ) : (
+              <></>
             )}
             {storedStatus != "bangkit2023" && StatusOnChange == "Not Delivered" ? (
               <li className="pt-3 pb-0 sm:pt-4">
@@ -331,13 +349,15 @@ function DeliveryContent(props) {
                 >
                   Update
                 </button>
-              ) : (
+              ) : verification != "Verified by Delivery Team" ? (
                 <button
                   onClick={handleSubmit}
                   class="btn-rounded text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
                   Update
                 </button>
+              ) : (
+                <></>
               )}
             </div>
           </ul>
