@@ -72,8 +72,8 @@ function DeliveryContent(props) {
       .then((res) => {
         if (res.data.status == "success") {
           alert(res.data.status);
-          router.push({
-            pathname: "/dashboard",
+          router.reload({
+            pathname: `/${del_id}`,
             query: {
               plat_no: plat_no,
             },
@@ -91,8 +91,8 @@ function DeliveryContent(props) {
       .then((res) => {
         if (res.data.status == "success") {
           alert(res.data.status);
-          router.push({
-            pathname: "/dashboard",
+          router.reload({
+            pathname: `/${del_id}`,
             query: {
               plat_no: plat_no,
             },

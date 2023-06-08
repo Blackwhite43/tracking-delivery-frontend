@@ -1,12 +1,36 @@
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import i18n from "@/services/i18n";
 import DataTable from "@/components/DataTable";
 import axios from "axios";
 import Link from "next/link";
 
 const AllDelivery = () => {
+  const router = useRouter();
   const [delivery, setDelivery] = useState([]);
-
+  const handleSubmit = (event) => { // Tidak mau langsung update jika di klik sekali
+    event.preventDefault();
+    const buttons = document.getElementsByTagName("button");
+    const buttonPressed = e => {
+      axios.patch(`${process.env.URL}/api/v1/admin/${e.target.id}`, {
+        verification: "Verified by Delivery Team"
+      })
+      .then((res) => {
+        if (res.data.status == "success") {
+          alert(res.data.status);
+          router.reload({
+            pathname: "/delivery"
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    }
+    for (let button of buttons) {
+      button.addEventListener("click", buttonPressed);
+    }
+  }
   function refreshDataDelivery() {
     try {
       axios.get(`${process.env.URL}/api/v1/admin/`).then((hsl) => {
@@ -185,7 +209,24 @@ const AllDelivery = () => {
         },
         filter: false
       },
-      
+    },
+    {
+      name: "delivery_update",
+      label: i18n.t("Detail Delivery"),
+      options: {
+        customBodyRender: (value) => {
+          return (
+            <button
+              id={value._id}
+              onClick={handleSubmit}
+              class="btn-rounded text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              Verify Delivery
+            </button>
+          )
+        },
+        filter: false
+      },
     }
   ];
 

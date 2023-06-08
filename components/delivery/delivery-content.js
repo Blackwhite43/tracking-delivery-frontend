@@ -29,7 +29,7 @@ function DeliveryContent(props) {
               <div
                 className={`rounded-lg p-4 ${
                   delivery_update == "Ready for Delivery"
-                    ? "bg-yellow-400"
+                    ? "bg-sky-400"
                     : delivery_update == "Not Delivered"
                     ? "bg-red-500"
                     : delivery_update == "Delivered"
@@ -197,7 +197,7 @@ function DeliveryContent(props) {
           <div
             class={`flex rounded-lg h-full ${
               delivery_update == "Ready for Delivery"
-                ? "bg-yellow-400"
+                ? "bg-sky-400"
                 : delivery_update == "Not Delivered"
                 ? "bg-red-500"
                 : delivery_update == "Delivered"
