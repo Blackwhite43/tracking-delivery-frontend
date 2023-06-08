@@ -5,12 +5,21 @@ function DeliveryContent(props) {
   const router = useRouter();
   const [StatusOnChange, setStatusOnChange] = useState();
   const [Message, setMessage] = useState();
+  const [Edit, setEdit] = useState(false);
   const {del_id, plat_no, driver, kenek, customer, asal, jumlah_surat_jalan, jenis_barang, instruksi, delivery_update, photo, verification, reason} = props;
   function get_onchange_status() {
     setStatusOnChange(document.getElementById("status").value);
   }
   function get_onchange_message() {
     setMessage(document.getElementById("message").value);
+  }
+  function get_edit() {
+    if (Edit == true) {
+      setEdit(false);
+    }
+    else {
+      setEdit(true)
+    }
   }
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -48,23 +57,52 @@ function DeliveryContent(props) {
   }
   const handleSubmit_admin = (event) => {
     event.preventDefault();
-    axios.patch(`${process.env.URL}/api/v1/admin/${del_id}`, {
-      verification: document.getElementById("verification").value
-    })
-    .then((res) => {
-      if (res.data.status == "success") {
-        alert(res.data.status);
-        router.push({
-          pathname: "/dashboard",
-          query: {
-            plat_no: plat_no,
-          },
-        });
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    if (Edit == true) {
+      axios.patch(`${process.env.URL}/api/v1/admin/${del_id}`, {
+        plat_no: document.getElementById("plat_no").value,
+        driver: document.getElementById("driver").value,
+        kenek: document.getElementById("kenek").value,
+        customer: document.getElementById("customer").value,
+        asal: document.getElementById("asal").value,
+        jumlah_surat_jalan: document.getElementById("jumlah_surat_jalan").value,
+        jenis_barang: document.getElementById("jenis_barang").value,
+        instruksi: document.getElementById("instruksi").value,
+        verification: document.getElementById("verification").value
+      })
+      .then((res) => {
+        if (res.data.status == "success") {
+          alert(res.data.status);
+          router.push({
+            pathname: "/dashboard",
+            query: {
+              plat_no: plat_no,
+            },
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    }
+    else {
+      axios.patch(`${process.env.URL}/api/v1/admin/${del_id}`, {
+        verification: document.getElementById("verification").value
+      })
+      .then((res) => {
+        if (res.data.status == "success") {
+          alert(res.data.status);
+          router.push({
+            pathname: "/dashboard",
+            query: {
+              plat_no: plat_no,
+            },
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    }
   }
   let storedStatus = localStorage.getItem("no_plat");
   if (typeof window !== "undefined") {
@@ -92,9 +130,17 @@ function DeliveryContent(props) {
                         Plat No.
                       </p>
                     </div>
-                    <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                      {plat_no}
-                    </div>
+                    {Edit == true ? (
+                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white border">
+                        <form>
+                          <input type="text" id="plat_no" defaultValue={plat_no}></input>
+                        </form>
+                      </div>
+                    ) : (
+                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                        {plat_no}
+                      </div>
+                    )}
                   </div>
                 </li>
                 <li className="py-3 sm:py-4">
@@ -104,9 +150,17 @@ function DeliveryContent(props) {
                         Driver
                       </p>
                     </div>
-                    <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                      {driver}
-                    </div>
+                    {Edit == true ? (
+                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white border">
+                        <form>
+                          <input type="text" id="driver" defaultValue={driver}></input>
+                        </form>
+                      </div>
+                    ) : (
+                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                        {driver}
+                      </div>
+                    )}
                   </div>
                 </li>
                 <li className="py-3 sm:py-4">
@@ -116,9 +170,17 @@ function DeliveryContent(props) {
                         Kenek
                       </p>
                     </div>
-                    <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                      {kenek}
-                    </div>
+                    {Edit == true ? (
+                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white border">
+                        <form>
+                          <input type="text" id="kenek" defaultValue={kenek}></input>
+                        </form>
+                      </div>
+                    ) : (
+                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                        {kenek}
+                      </div>
+                    )}
                   </div>
                 </li>
               </>
@@ -132,9 +194,17 @@ function DeliveryContent(props) {
                     Customer
                   </p>
                 </div>
-                <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                  {customer}
-                </div>
+                {Edit == true ? (
+                  <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white border">
+                    <form>
+                      <input type="text" id="customer" defaultValue={customer}></input>
+                    </form>
+                  </div>
+                ) : (
+                  <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                    {customer}
+                  </div>
+                )}
               </div>
             </li>
             <li className="py-3 sm:py-4">
@@ -144,9 +214,17 @@ function DeliveryContent(props) {
                     Asal
                   </p>
                 </div>
-                <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                  {asal}
-                </div>
+                {Edit == true ? (
+                  <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white border">
+                    <form>
+                      <input type="text" id="asal" defaultValue={asal}></input>
+                    </form>
+                  </div>
+                ) : (
+                  <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                    {asal}
+                  </div>
+                )}
               </div>
             </li>
             <li className="py-3 sm:py-4">
@@ -156,9 +234,17 @@ function DeliveryContent(props) {
                     Jumlah Surat Jalan
                   </p>
                 </div>
-                <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                  {jumlah_surat_jalan}
-                </div>
+                {Edit == true ? (
+                  <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white border">
+                    <form>
+                      <input type="text" id="jumlah_surat_jalan" defaultValue={jumlah_surat_jalan}></input>
+                    </form>
+                  </div>
+                ) : (
+                  <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                    {jumlah_surat_jalan}
+                  </div>
+                )}
               </div>
             </li>
             <li className="py-3 sm:py-4">
@@ -168,9 +254,17 @@ function DeliveryContent(props) {
                     Jenis Barang
                   </p>
                 </div>
-                <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                  {jenis_barang}
-                </div>
+                {Edit == true ? (
+                  <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white border">
+                    <form>
+                      <input type="text" id="jenis_barang" defaultValue={jenis_barang}></input>
+                    </form>
+                  </div>
+                ) : (
+                  <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                    {jenis_barang}
+                  </div>
+                )}
               </div>
             </li>
             <li className="pt-3 pb-0 sm:pt-4">
@@ -180,9 +274,17 @@ function DeliveryContent(props) {
                     Instruksi
                   </p>
                 </div>
-                <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                  {instruksi}
-                </div>
+                {Edit == true ? (
+                  <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white border">
+                    <form>
+                      <input type="text" id="instruksi" defaultValue={instruksi}></input>
+                    </form>
+                  </div>
+                ) : (
+                  <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                    {instruksi}
+                  </div>
+                )}
               </div>
             </li>
             <li className="pt-3 pb-0 sm:pt-4">
@@ -261,10 +363,12 @@ function DeliveryContent(props) {
               </div>
               {storedStatus == "bangkit2023" ? (
                   <></>
-                ) : (
+                ) : verification != "Verified by Delivery Team" ? (
                   <form>
                     <input type="file" id="myfile" name="myfile"></input>
                   </form>
+                ) : (
+                  <></>
                 )}
             </li>
             {storedStatus == "bangkit2023" ? (
@@ -339,16 +443,33 @@ function DeliveryContent(props) {
             ) : (
               <></>
             )}
-              
-            
-            <div class="flex items-center justify-end mt-5 pt-5">
+            <li class={`flex items-center ${storedStatus == "bangkit2023" ? "justify-between" : "justify-end"} mt-5 pt-5`}>
               {storedStatus == "bangkit2023" ? (
-                <button
-                  onClick={handleSubmit_admin}
-                  class="btn-rounded text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                >
-                  Update
-                </button>
+                <>
+                  {Edit == false ? (
+                    <button
+                    onClick={get_edit}
+                    class="btn-rounded text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    >
+                      Edit Data
+                    </button>
+                  ) : (
+                    <button
+                    onClick={get_edit}
+                    class="btn-rounded text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    >
+                      Exit Edit Data
+                    </button>
+                  )}
+                  
+                  <button
+                    onClick={handleSubmit_admin}
+                    class="btn-rounded text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  >
+                    Update
+                  </button>
+                </>
+                
               ) : verification != "Verified by Delivery Team" ? (
                 <button
                   onClick={handleSubmit}
@@ -359,7 +480,7 @@ function DeliveryContent(props) {
               ) : (
                 <></>
               )}
-            </div>
+            </li>
           </ul>
         </div>
       </div>
