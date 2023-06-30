@@ -1,17 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import MUIDataTable from "mui-datatables";
 import { useTheme } from "next-themes";
 
 const DataTable = (props) => {
   const { theme } = useTheme();
-
   const light = {
     palette: {
       mode: "light",
     },
   };
-
   const dark = {
     palette: {
       mode: "dark",
@@ -30,8 +28,8 @@ const DataTable = (props) => {
     tableBodyHeight: "50vh",
     selectableRowsHideCheckboxes: true,
     pagination: true,
-    rowsPerPage: 5,
-    rowsPerPageOptions: [5, 10, 20, 50],
+    rowsPerPage: 50,
+    rowsPerPageOptions: [5, 10, 20, 50, 100]
   };
 
   return (
