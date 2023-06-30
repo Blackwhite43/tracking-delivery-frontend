@@ -132,6 +132,18 @@ function DeliveryContent(props) {
       });
     }
   }
+  const handler_getfile = (event) => {
+    event.preventDefault();
+    axios.get(`${process.env.URL}/api/v1/user/get-files/${del_id}`)
+    .then(res => {
+      router.push({
+        pathname: `https://drive.google.com/file/d/${res.data.id}/view`
+      })
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }
   let storedStatus = localStorage.getItem("no_plat");
   if (typeof window !== "undefined") {
     storedStatus = window.localStorage.getItem("no_plat");
@@ -373,12 +385,12 @@ function DeliveryContent(props) {
                 </div>
                 <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
                   {photo != "" ?
-                    <a
+                    <button
                       class="btn btn-primary btn-rounded mb-2"
-                      href={`${process.env.URL}/${photo}`}
+                      onClick={handler_getfile}
                     >
                       Foto
-                    </a>
+                    </button>
                     : 
                     <p
                       class="btn btn-primary btn-rounded mb-2"
