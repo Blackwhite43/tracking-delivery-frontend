@@ -27,9 +27,7 @@ const Dashboard = (props) => {
     });
     axios.post(`${process.env.URL}/api/v1/admin/stats`, dataSearch)
     .then((hsl) => {
-      if (hsl.data.data.length >= 1) {
         setStatistics(hsl.data.data);
-      }
     });
   }
   useEffect(() => {
@@ -50,9 +48,7 @@ const Dashboard = (props) => {
     });
     axios.post(`${process.env.URL}/api/v1/admin/stats`, dataSearch)
     .then((hsl) => {
-      if (hsl.data.data.length >= 1) {
         setStatistics(hsl.data.data);
-      }
     });
   }, []);
   var delivered = 0, ready_for_delivery = 0, not_delivered = 0;

@@ -21,38 +21,37 @@ const AllDelivery = () => {
     }
   }
   const handleVerify = (event) => {
-    array.map(index => {
-      axios.patch(`${process.env.URL}/api/v1/admin/${index}`, {
-        verification: "Verified by Delivery Team"
+    try {
+      array.map(index => {
+        axios.patch(`${process.env.URL}/api/v1/admin/${index}`, {
+          verification: "Verified by Delivery Team"
+        })
       })
-      .then((res) => {
-        if (res.data.status == "success") {
-          alert(res.data.status);
-          router.reload({
-            pathname: "/delivery"
-          });
-        }
-      })
-      .catch((error) => {
-        console.log(error);
+    } catch (error) {
+      console.log(error);
+    }
+    finally {
+      alert("success");
+      router.reload({
+        pathname: "/delivery"
       });
-    })
+    }
   }
   const handleDelete = (event) => {
-    array.map(index => {
-      axios.delete(`${process.env.URL}/api/v1/admin/${index}`)
-      .then((res) => {
-        if (res.data.status == "success") {
-          alert(res.data.status);
-          router.reload({
-            pathname: "/delivery"
-          });
-        }
+    try {
+      array.map(index => {
+        axios.delete(`${process.env.URL}/api/v1/admin/${index}`)
       })
-      .catch((error) => {
-        console.log(error);
+    } catch (error) {
+      console.log(error);
+    }
+    finally {
+      alert("success");
+      router.reload({
+        pathname: "/delivery"
       });
-    })
+    }
+    
   }
   const handlePush = (event) => {
     event.preventDefault();
