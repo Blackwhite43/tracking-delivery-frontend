@@ -15,7 +15,6 @@ const DataTable = (props) => {
       mode: "dark",
     },
   };
-
   const options = {
     filter: true,
     download: true,
@@ -25,11 +24,11 @@ const DataTable = (props) => {
     fixedHeader: true,
     fixedSelectColumn: true,
     // tableBodyHeight: '44em',
-    tableBodyHeight: "50vh",
+    tableBodyHeight: "maxheight",
     selectableRowsHideCheckboxes: true,
     pagination: true,
     rowsPerPage: 50,
-    rowsPerPageOptions: [5, 10, 20, 50, 100]
+    rowsPerPageOptions: [5, 10, 20, 50, 100],
   };
 
   return (

@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useRef, useEffect, useState } from "react";
 import classes from "./event-search.module.css";
 import { useRouter } from "next/router";
+import moment from "moment";
 
 const Dashboard = (props) => {
   const {del_id, plat_no, driver, kenek, customer, asal, jumlah_surat_jalan, jenis_barang, instruksi, delivery_update, tanggal} = props;
@@ -133,8 +134,9 @@ const Dashboard = (props) => {
 };
 
 export function KomponenCard(props) {
-  const {del_id, plat_no, driver, kenek, customer, asal, jumlah_surat_jalan, jenis_barang, instruksi, delivery_update, tanggal} = props;
   const router = useRouter();
+  const {del_id, plat_no, driver, kenek, customer, asal, jumlah_surat_jalan, jenis_barang, instruksi, delivery_update, tanggal} = props;
+  var toLocal = moment(tanggal).format("DD-MM-YYYY");
   const preventDefault = (f) => (e) => {
     e.preventDefault();
     f(e);
@@ -162,7 +164,7 @@ export function KomponenCard(props) {
               <div
                 className={`rounded-lg p-4 flex flex-col
                 ${
-                  props.delivery_update == "Ready for Delivery"
+                  delivery_update == "Ready for Delivery"
                     ? "bg-sky-400"
                     : delivery_update == "Not Delivered"
                     ? "bg-red-500"
@@ -173,27 +175,27 @@ export function KomponenCard(props) {
               >
                 <div className="grid-cols-2 flex justify-end">
                   <h5 className="text-white text-1xl font-bold leading-none">
-                      {props.tanggal.split('T')[0]}
+                      {toLocal}
                   </h5>
                 </div>
                 <div className="grid-cols-2 flex justify-start">
                   <h5 className="text-white text-2xl font-bold leading-none">
-                      {props.plat_no}
+                      {plat_no}
                   </h5>
                 </div>
                 <div>
                   <h5 className="text-white text-2xl font-bold leading-none ">
-                    {props.customer}
+                    {customer}
                   </h5>
                   <span className="text-xs text-black-900 font-bold leading-none">
-                    {props.asal}
+                    {asal}
                   </span>
                 </div>
                 <div className="flex items-center">
                   <div className="text-lg text-white font-light">
                     <div class="flex-1 min-w-0">
                       <p class="text-sm font-medium hover:text-gray-900 truncate dark:text-white text-white">
-                        Surat Jalan: {props.jumlah_surat_jalan}
+                        Surat Jalan: {jumlah_surat_jalan}
                       </p>
                     </div>
                   </div>

@@ -5,9 +5,10 @@ import BahasaSwitcher from "../../BahasaSwitcher/BahasaSwitcher";
 import Image from "next/image";
 import ThemeSwitcher from "../../ThemeSwitcher";
 import NavBar from "@/components/layout/NavBar";
-
+import moment from "moment";
 const NavbarCustom = () => {
   const router = useRouter();
+  const [Time, setTime] = useState([]);
   function handleLogout() {
     localStorage.removeItem("no_plat"); //hapus local storage
     router.reload("/login");
@@ -56,6 +57,11 @@ const NavbarCustom = () => {
       setData(localStorageData);
     }
   }, [storedStatus]);
+  useEffect(() => {
+    setInterval(() => {
+      setTime(moment().format("DD-MM-YYYY HH:mm:ss"));
+    }, 1)
+  }, [])
   return (
     <div className="sticky top-0">
       {/*  BEGIN NAVBAR  */}
@@ -122,7 +128,14 @@ const NavbarCustom = () => {
                 
               </li>
             </ul>
-
+            {/* <ul className="flex justify-center items-center gap-3 mr-3">
+              <li className="nav-item dropdown user-profile-dropdown d-flex justify-content-center align-items-center ml-2">
+                Server Time:
+              </li>
+              <li>
+                {Time}
+              </li>
+            </ul> */}
             <ul className="flex justify-center items-center gap-3 mr-3">
               {/* <BahasaSwitcher /> */}
 
