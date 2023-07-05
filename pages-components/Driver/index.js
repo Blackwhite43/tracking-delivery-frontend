@@ -117,13 +117,13 @@ const AllDelivery = () => {
       <div class="m-3 p-3 bg-[var(--warna-14)] border-gray-200 rounded-lg shadow sm:p-2 dark:bg-gray-800 dark:border-gray-700">
         <div className="flex justify-between">
           <div class="text-2xl font-bold mb-2 text-[var(--warna-9)]">
-            Data Driver
+            Tips Delivery
           </div>
         </div>
         <div className="widget-content">
           <EventsSearch onSearch={refreshDataDelivery} />
           <DataTable
-            title="Data Driver"
+            title="Tips Delivery"
             data={delivery}
             columns={columnsDelivery}
           />

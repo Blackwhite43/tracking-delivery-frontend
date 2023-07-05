@@ -1,8 +1,8 @@
+import axios from "axios";
 import { useRouter } from "next/router";
 
 const preventDefault = (f) => (e) => {
   e.preventDefault();
-  // console.log("ini", document.getElementById("plat_no").value);
   f(e);
 };
 
@@ -11,6 +11,7 @@ export default function Login() {
   const handleSubmit = preventDefault(() => {
     const plat_no = document.getElementById("plat_no").value;
     if (plat_no == "bangkit2023") {
+      alert("Login Sukses");
       localStorage.setItem("no_plat", plat_no); //tambah local storage
       router.replace({
         pathname: "/dashboard",
@@ -18,11 +19,22 @@ export default function Login() {
       });
     }
     else {
-      localStorage.setItem("no_plat", plat_no); //tambah local storage
-      router.replace({
-        pathname: "/",
-        query: { plat_no: plat_no },
-      });
+      axios.post(`${process.env.URL}/api/v1/user/check`, {
+        plat_no: plat_no
+      })
+      .then(data => {
+        if (data.data.data == true) {
+          alert("Login Sukses");
+          localStorage.setItem("no_plat", plat_no); //tambah local storage
+          router.replace({
+            pathname: "/",
+            query: { plat_no: plat_no },
+          });
+        }
+        else {
+          alert("Silahkan masukkan nomor plat dengan benar!");
+        }
+      })
     }
     // localStorage.removeItem("no_plat"); //hapus local storage
     // localStorage.getItem("no_plat") //get

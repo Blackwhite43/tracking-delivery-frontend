@@ -209,7 +209,18 @@ const AllDelivery = () => {
         setCellProps: () => ({ style: { whiteSpace: "nowrap" } }),
         width: "5em",
         fontSize: "4em",
-        customBodyRender: (value) => value.status_delivery,
+        customBodyRender: (value) => {
+          return (
+            <div className={
+              value.status_delivery == "Ready for Delivery" ? `text-sky-400` :
+              value.status_delivery == "Not Delivered" ? `text-red-500` :
+              value.status_delivery == "Delivered" ? `text-green-400` :
+              ''}
+            >
+              {value.status_delivery}
+            </div>
+          )
+        },
       },
     },
     {

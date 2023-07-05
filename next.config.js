@@ -5,7 +5,8 @@ const nextConfig = {
   /* config options here */
   reactStrictMode: true,
   env: {
-    URL: "http://vps.airlab.id:3000",
+    URL: "http://vps.airlab.id:3000"
+    // URL: "http://localhost:3000"
   },
   i18n: {
     locales: ["en", "id"],
