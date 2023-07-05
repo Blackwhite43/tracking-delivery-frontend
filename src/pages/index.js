@@ -1,47 +1,47 @@
 import DeliveryList from "@/components/delivery/delivery-list";
 import { useRouter } from "next/router";
-import PageWithJSbasedForm from "./api/home_data";
-import AllDelivery from "./api/all_delivery_data";
 import { useState, useEffect } from "react";
-import { get_information } from "@/components/get_information";
 import Image from "next/image";
+import axios from "axios";
 
 export default function Home() {
-  const [Data, setData] = useState();
-  const [fullData, setfullData] = useState();
+  const [Home, setHome] = useState();
+  const [Stats, setStats] = useState();
   const router = useRouter();
   let temp = [];
   let temp2 = [];
-  let driver, kenek, index, delivered;
+  let driver, kenek, ready_for_delivery;
   // const data = Get_alldata();
   const data = router.query;
   useEffect(() => {
-    const test = async () => {
-      const x = await PageWithJSbasedForm(data);
-      setData(x);
-    };
-    const test2 = async () => {
-      const x = await AllDelivery(data);
-      setfullData(x);
-    };
-    test();
-    test2();
+    axios.post(`${process.env.URL}/api/v1/user/home`, data)
+    .then(data => {
+      setHome(data.data.data);
+    })
+    .catch(error => {
+      console.log(error);
+    })
+    axios.post(`${process.env.URL}/api/v1/user/stats`, data)
+    .then(data => {
+      setStats(data.data.data[0]);
+    })
+    .catch(error => {
+      console.log(error);
+    })
   }, [data]);
   if (typeof window !== "undefined") {
     if (localStorage.getItem("no_plat") == "bangkit2023") {
       router.replace("/dashboard")
     }
   }
-  if (Data != undefined && fullData != undefined) {
-    //filter undefined data
-    temp = Data;
-    temp2 = fullData;
+  if (Home != undefined && Stats != undefined) {
+    temp = Home;
+    temp2 = Stats;
   }
-  driver = get_information(temp2).driver;
-  kenek = get_information(temp2).kenek;
-  index = get_information(temp2).index;
-  delivered = get_information(temp2).delivered;
-  if (index - delivered == 0) {
+  driver = temp2._id?.driver;
+  kenek = temp2._id?.kenek;
+  ready_for_delivery = temp2.ready_for_delivery;
+  if (ready_for_delivery == 0) {
     return (
       // ignore error saja
       <div className="px-10 py-5 flex items-center flex-col">

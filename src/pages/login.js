@@ -10,14 +10,15 @@ export default function Login() {
   const router = useRouter();
   const handleSubmit = preventDefault(() => {
     const plat_no = document.getElementById("plat_no").value;
-    localStorage.setItem("no_plat", plat_no); //tambah local storage
     if (plat_no == "bangkit2023") {
+      localStorage.setItem("no_plat", plat_no); //tambah local storage
       router.replace({
         pathname: "/dashboard",
         query: { plat_no: plat_no },
       });
     }
     else {
+      localStorage.setItem("no_plat", plat_no); //tambah local storage
       router.replace({
         pathname: "/",
         query: { plat_no: plat_no },

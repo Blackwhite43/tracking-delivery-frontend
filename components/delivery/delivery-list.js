@@ -1,22 +1,21 @@
 import DeliveryContent from "./delivery-content";
-import { get_information } from "../../components/get_information";
 
 function DeliveryList(props) {
   const { items, stats } = props;
-  let plat, driver, kenek, index, delivered;
-  plat = get_information(stats).plat_no;
-  driver = get_information(stats).driver;
-  kenek = get_information(stats).kenek;
-  delivered = get_information(stats).delivered;
-  index = get_information(stats).index;
-
+  let plat, driver, kenek, delivered, ready_for_delivery, not_delivered;
+  plat = stats._id?.plat_no;
+  driver = stats._id?.driver;
+  kenek = stats._id?.kenek;
+  delivered = stats.delivered;
+  ready_for_delivery = stats.ready_for_delivery;
+  not_delivered = stats.not_delivered;
   return (
     <>
       <div class="p-2 bg-[var(--warna-14)] border border-gray-200 rounded-lg shadow sm:p-2 dark:bg-gray-800 dark:border-gray-700">
         <h2 class="text-2xl font-bold mb-2 text-[var(--warna-9)]">
           Details Delivery
         </h2>
-        <div className="grid grid-cols-2 gap-1">
+        <div className="grid grid-cols-3 gap-1">
           <li className="sm:py-4 list-none">
             <div className="flex items-center space-x-4">
               <div className="flex-1 min-w-0">
@@ -53,12 +52,23 @@ function DeliveryList(props) {
               </div>
             </div>
           </li>
-
+          <li className="pb-0 sm:pt-4 list-none">
+            <div className="flex items-center space-x-4">
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-[var(--warna-9)] truncate ">
+                  Sisa Pengiriman:
+                </p>
+                <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+                  {ready_for_delivery}
+                </p>
+              </div>
+            </div>
+          </li>
           <li className="sm:py-4 list-none">
             <div className="flex items-center space-x-4">
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-[var(--warna-9)] truncate ">
-                  Delivered:
+                  Terkirim:
                 </p>
                 <p className="text-sm text-gray-500 truncate dark:text-gray-400">
                   {delivered}
@@ -66,14 +76,14 @@ function DeliveryList(props) {
               </div>
             </div>
           </li>
-          <li className="pb-0 sm:pt-4 list-none">
+          <li className="sm:py-4 list-none">
             <div className="flex items-center space-x-4">
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-[var(--warna-9)] truncate ">
-                  Remaining Deliveries:
+                  Tidak Terkirim:
                 </p>
                 <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                  {index - delivered}
+                  {not_delivered}
                 </p>
               </div>
             </div>
@@ -81,7 +91,7 @@ function DeliveryList(props) {
         </div>
       </div>
       <div className="grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-        {items.map((item) => (
+        {items?.map((item) => (
           <DeliveryContent
             // plat_no={item.plat_no}
             // driver={item.driver}

@@ -110,7 +110,7 @@ const AllDelivery = () => {
       name: "driver",
       label: i18n.t("Driver"),
       options: {
-        filter: false,
+        filter: true,
         setCellHeaderProps: () => ({
           style: {
             fontSize: "4em",

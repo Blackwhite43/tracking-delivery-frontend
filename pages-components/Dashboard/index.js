@@ -69,7 +69,7 @@ const Dashboard = (props) => {
             <div className="flex items-center space-x-4">
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-[var(--warna-9)] truncate">
-                  Ready for Delivery:
+                  Sisa Pengiriman:
                 </p>
                 <p className="text-sm text-gray-500 truncate dark:text-gray-400">
                   {ready_for_delivery}
@@ -81,7 +81,7 @@ const Dashboard = (props) => {
             <div className="flex items-center space-x-4">
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-[var(--warna-9)] truncate">
-                  Delivered:
+                  Terkirim:
                 </p>
                 <p className="text-sm text-gray-500 truncate dark:text-gray-400">
                   {delivered}
@@ -93,7 +93,7 @@ const Dashboard = (props) => {
             <div className="flex items-center space-x-4">
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-[var(--warna-9)] truncate">
-                  Not Delivered
+                  Tidak Terkirim
                 </p>
                 <p className="text-sm text-gray-500 truncate dark:text-gray-400">
                   {not_delivered}

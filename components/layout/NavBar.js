@@ -100,6 +100,11 @@ export default function NavBar() {
                         All Delivery
                       </Link>
                     </li>
+                    <li className="text-white hover:text-indigo-200">
+                      <Link href={`/driver/?plat_no=${dataLocal}`}>
+                        Data Driver
+                      </Link>
+                    </li>
                   </>
                 ) : (
                   <>
