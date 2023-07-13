@@ -295,7 +295,7 @@ const AllDelivery = () => {
     }
   ];
   return (
-    <div class="p-3 relative w-full bg-[var(--warna-14)] border-gray-200 rounded-lg shadow sm:p-2 dark:bg-gray-800 dark:border-gray-700">
+    <div class="p-3 w-full bg-[var(--warna-14)] border-gray-200 rounded-lg shadow sm:p-2 dark:bg-gray-800 dark:border-gray-700">
       <div className="flex justify-between">
         <div class="text-2xl font-bold mb-2 text-[var(--warna-9)]">
           Data All Delivery
@@ -322,12 +322,14 @@ const AllDelivery = () => {
         </div>
       </div>
       <EventsSearch onSearch={refreshDataDelivery} />
-      <div>
-        <DataTable
-          title="Data All Delivery"
-          data={delivery}
-          columns={columnsDelivery}
-        />
+      <div className="relative">
+        <div className="absolute w-full">
+          <DataTable
+            title="Data All Delivery"
+            data={delivery}
+            columns={columnsDelivery}
+          />
+        </div>
       </div>
     </div>
   );

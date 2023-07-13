@@ -10,7 +10,7 @@ function DeliveryList(props) {
   ready_for_delivery = stats.ready_for_delivery;
   not_delivered = stats.not_delivered;
   return (
-    <div className="relative">
+    <div>
       <div class="p-2 bg-[var(--warna-14)] border border-gray-200 rounded-lg shadow sm:p-2 dark:bg-gray-800 dark:border-gray-700">
         <h2 class="text-2xl font-bold mb-2 text-[var(--warna-9)]">
           Details Delivery
@@ -90,23 +90,25 @@ function DeliveryList(props) {
           </li>
         </div>
       </div>
-      <div className="w-full absolute grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-        {items?.map((item) => (
-          <DeliveryContent
-            // plat_no={item.plat_no}
-            // driver={item.driver}
-            // kenek={item.kenek}
-            del_id={item.delivery_update._id}
-            customer={item.customer}
-            asal={item.asal}
-            jumlah_surat_jalan={item.jumlah_surat_jalan}
-            jenis_barang={item.jenis_barang}
-            instruksi={item.instruksi}
-            delivery_update={item.delivery_update.status_delivery}
-            verification={item.delivery_update.verification}
-            key={item._id}
-          />
-        ))}
+      <div className="relative">
+        <div className="w-full absolute grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+          {items?.map((item) => (
+            <DeliveryContent
+              // plat_no={item.plat_no}
+              // driver={item.driver}
+              // kenek={item.kenek}
+              del_id={item.delivery_update._id}
+              customer={item.customer}
+              asal={item.asal}
+              jumlah_surat_jalan={item.jumlah_surat_jalan}
+              jenis_barang={item.jenis_barang}
+              instruksi={item.instruksi}
+              delivery_update={item.delivery_update.status_delivery}
+              verification={item.delivery_update.verification}
+              key={item._id}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
