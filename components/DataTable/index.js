@@ -32,7 +32,7 @@ const DataTable = (props) => {
   };
 
   return (
-    <>
+    <div>
       <ThemeProvider
         theme={theme === "dark" ? createTheme(dark) : createTheme(light)}
       >
@@ -43,7 +43,7 @@ const DataTable = (props) => {
           options={options}
         />
       </ThemeProvider>
-    </>
+    </div>
   );
 };
 

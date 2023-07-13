@@ -64,7 +64,6 @@ export default function Home() {
         <div>
           Halo {driver} dan {kenek}, berikut ini adalah sisa delivery anda
         </div>
-        <br></br>
         <DeliveryList items={temp} stats={temp2}></DeliveryList>
       </div>
     );

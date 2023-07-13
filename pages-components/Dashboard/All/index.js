@@ -7,12 +7,12 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import axios from "axios";
 import Link from "next/link";
 import EventsSearch from "@/components/Admin/event-search";
-
+import { TableCell } from '@mui/material';
 const AllDelivery = () => {
   var array = [];
   const router = useRouter();
   const [delivery, setDelivery] = useState([]);
-  const handleSubmit = (event) => {
+  const handleCheck = (event) => {
     if (event.target.checked == true) {
       array.push(event.target.id);
     }
@@ -254,13 +254,25 @@ const AllDelivery = () => {
             </div>
           )
         },
-        filter: false
+        filter: false,
+        sort: false
       },
     },
     {
       name: "delivery_update",
-      label: i18n.t("Update Verification"),
+      label: "Verification",
       options: {
+        // customHeadRender: (() => {
+        //   return (
+        //     <TableCell>
+        //       <FormControlLabel
+        //         control={<Checkbox />}
+        //         label= "Check All"
+        //         labelPlacement="end"
+        //       />
+        //     </TableCell>
+        //   )
+        // }),
         customBodyRender: (value) => {
           if (value.verification == "Verified by Delivery Team") {
             return (
@@ -270,55 +282,54 @@ const AllDelivery = () => {
           else {
             return (
               <FormControlLabel
-                control={<Checkbox id={value._id} onChange={handleSubmit}/>}
+                control={<Checkbox id={value._id} onChange={handleCheck}/>}
                 label= "Verification"
                 labelPlacement="end"
               />
             )
           }
         },
-        filter: false
+        filter: false,
+        sort: false
       },
     }
   ];
   return (
-    <>
-      <div class="m-3 p-3 bg-[var(--warna-14)] border-gray-200 rounded-lg shadow sm:p-2 dark:bg-gray-800 dark:border-gray-700">
-        <div className="flex justify-between">
-          <div class="text-2xl font-bold mb-2 text-[var(--warna-9)]">
-            Data All Delivery
-          </div>
-          <div>
-            <button
-              onClick={handlePush}
-              class="btn-rounded text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              Create Data
-            </button>
-            <button
-              onClick={handleVerify}
-              class="btn-rounded text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              Verify Delivery
-            </button>
-            <button
-              onClick={handleDelete}
-              class="btn-rounded text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              Delete Data
-            </button>
-          </div>
+    <div class="p-3 relative w-full bg-[var(--warna-14)] border-gray-200 rounded-lg shadow sm:p-2 dark:bg-gray-800 dark:border-gray-700">
+      <div className="flex justify-between">
+        <div class="text-2xl font-bold mb-2 text-[var(--warna-9)]">
+          Data All Delivery
         </div>
-        <div className="widget-content">
-          <EventsSearch onSearch={refreshDataDelivery} />
-          <DataTable
-            title="Data All Delivery"
-            data={delivery}
-            columns={columnsDelivery}
-          />
+        <div>
+          <button
+            onClick={handlePush}
+            class="btn-rounded text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            Create Data
+          </button>
+          <button
+            onClick={handleVerify}
+            class="btn-rounded text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            Verify Delivery
+          </button>
+          <button
+            onClick={handleDelete}
+            class="btn-rounded text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            Delete Data
+          </button>
         </div>
       </div>
-    </>
+      <EventsSearch onSearch={refreshDataDelivery} />
+      <div>
+        <DataTable
+          title="Data All Delivery"
+          data={delivery}
+          columns={columnsDelivery}
+        />
+      </div>
+    </div>
   );
 };
 

@@ -1,9 +1,10 @@
 import EventsSearch from "@/components/Admin/event-search";
 import axios from "axios";
-import React, { useRef, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./event-search.module.css";
 import { useRouter } from "next/router";
 import moment from "moment";
+// import ApexCharts from "apexcharts";
 
 const Dashboard = (props) => {
   const {del_id, plat_no, driver, kenek, customer, asal, jumlah_surat_jalan, jenis_barang, instruksi, delivery_update, tanggal} = props;
@@ -58,8 +59,33 @@ const Dashboard = (props) => {
     delivered += idx.delivered;
     not_delivered += idx.not_delivered;
   })
+  // var options = {
+  //     series: [44, 55, 13, 43, 22],
+  //     chart: {
+  //     width: 380,
+  //     type: 'pie',
+  //   },
+  //   labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
+  //   responsive: [{
+  //     breakpoint: 480,
+  //     options: {
+  //       chart: {
+  //         width: 200
+  //       },
+  //       legend: {
+  //         position: 'bottom'
+  //       }
+  //     }
+  //   }]
+  // };
+  // var chartOrigin = document.querySelector('#chart');
+  // if(chartOrigin && typeof window != "undefined") {
+  //     var chart = new ApexCharts(document.querySelector('#chart'), options);
+  //     chart.render();
+  // }
   return (
     <div>
+      {/* <div id="chart"></div> */}
       <div class="p-2 bg-[var(--warna-14)] border border-gray-200 rounded-lg shadow sm:p-2 dark:bg-gray-800 dark:border-gray-700">
         <h2 class="text-2xl font-bold mb-2 text-[var(--warna-9)]">
           Statistics
@@ -104,7 +130,7 @@ const Dashboard = (props) => {
         </ul>
       </div>
       <EventsSearch onSearch={refreshDataDelivery} />
-      <div className="grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+      <div className="w-full absolute grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
         {dataAvailable ? (
           dataDelivery?.map((dataList, idx) => {
             return (

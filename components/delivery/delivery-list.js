@@ -10,7 +10,7 @@ function DeliveryList(props) {
   ready_for_delivery = stats.ready_for_delivery;
   not_delivered = stats.not_delivered;
   return (
-    <>
+    <div className="relative">
       <div class="p-2 bg-[var(--warna-14)] border border-gray-200 rounded-lg shadow sm:p-2 dark:bg-gray-800 dark:border-gray-700">
         <h2 class="text-2xl font-bold mb-2 text-[var(--warna-9)]">
           Details Delivery
@@ -90,7 +90,7 @@ function DeliveryList(props) {
           </li>
         </div>
       </div>
-      <div className="grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+      <div className="w-full absolute grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
         {items?.map((item) => (
           <DeliveryContent
             // plat_no={item.plat_no}
@@ -108,7 +108,7 @@ function DeliveryList(props) {
           />
         ))}
       </div>
-    </>
+    </div>
   );
 }
 export default DeliveryList;

@@ -74,12 +74,12 @@ const NavbarCustom = () => {
                   <>
                     <Link href={`/dashboard/?plat_no=${data}`} locale={router.locale}>
                       <Image
-                        width={50}
-                        height={50}
+                        width={150}
+                        height={31.2}
                         src={`/templates/assets/img/${
                           thema === "dark"
-                            ? "logoariswhite.svg"
-                            : "logoarisWarna.png"
+                            ? "infiniti-4.0.png"
+                            : "infiniti-4.0.png"
                         }`}
                         alt="logo"
                       />
@@ -89,21 +89,20 @@ const NavbarCustom = () => {
                   <>
                     <Link href={`/?plat_no=${data}`} locale={router.locale}>
                       <Image
-                        width={50}
-                        height={50}
+                        width={150}
+                        height={31.2}
                         src={`/templates/assets/img/${
                           thema === "dark"
-                            ? "logoariswhite.svg"
-                            : "logoarisWarna.png"
+                            ? "infiniti-4.0.png"
+                            : "infiniti-4.0.png"
                         }`}
                         alt="logo"
                       />
                     </Link>
                   </>
                 )}
-                
               </li>
-              <li className="nav-item theme-text">
+              {/* <li className="nav-item theme-text">
                 {data == "bangkit2023" ? (
                   <>
                     <Link
@@ -125,33 +124,24 @@ const NavbarCustom = () => {
                     </Link>
                   </>
                 )}
-                
+              </li> */}
+            </ul>
+            <ul className="flex justify-center items-center gap-3 mr-3 max-lg:hidden">
+              <li className="nav-item dropdown user-profile-dropdown d-flex justify-content-center align-items-center ml-2 font-bold text-xl text-sky-500">
+                INFINITIGROUP TRACKING & REPORT DELIVERY
               </li>
             </ul>
-            {/* <ul className="flex justify-center items-center gap-3 mr-3">
-              <li className="nav-item dropdown user-profile-dropdown d-flex justify-content-center align-items-center ml-2">
-                Server Time:
-              </li>
-              <li>
-                {Time}
-              </li>
-            </ul> */}
             <ul className="flex justify-center items-center gap-3 mr-3">
               {/* <BahasaSwitcher /> */}
-
               <li className="nav-item dropdown user-profile-dropdown d-flex justify-content-center align-items-center ml-2">
                 <ThemeSwitcher />
               </li>
-
-              <li className="nav-item dropdown user-profile-dropdown d-flex justify-content-center align-items-center ml-2">
+              {/* <li className="nav-item dropdown user-profile-dropdown d-flex justify-content-center align-items-center ml-2">
                 <BahasaSwitcher />
-              </li>
-
-              <li className="nav-item dropdown user-profile-dropdown d-flex justify-content-center align-items-center ml-2">
-                {/* Ahmad Zaky */}
+              </li> */}
+              <li className="nav-item dropdown user-profile-dropdown d-flex justify-content-center align-items-center ml-2 max-lg:text-xs">
                 {data.toUpperCase()}
               </li>
-
               <li className="nav-item dropdown user-profile-dropdown">
                 <a
                   className="nav-link dropdown-toggle user rounded-circle"
